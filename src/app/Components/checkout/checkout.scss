@@ -1,0 +1,289 @@
+/* --- עיצוב כללי של העמוד --- */
+:host {
+  display: block;
+  font-family: 'Assistant', sans-serif;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+}
+.checkout-page {
+  direction: rtl;
+  background-color: #fff;
+  padding: 60px 0;
+  font-family: 'Assistant', sans-serif;
+
+  .checkout-container {
+    max-width: 1300px;
+    width: 90%;
+    margin: 0 auto;
+
+    .main-title {
+      font-size: 32px;
+      font-weight: 300;
+      margin-bottom: 50px;
+      text-align: center;
+      letter-spacing: 2px;
+    }
+  }
+
+  .checkout-section {
+    background-color: #f6f6f6;
+    padding: 40px;
+    margin-bottom: 40px;
+    border-radius: 4px;
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between; // מאפשר לאייקון הפלוס/מינוס ללכת שמאלה
+      margin-bottom: 30px;
+      
+      .step-header-left {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+      
+      h2 { font-size: 22px; font-weight: 700; margin: 0; color: #27251F; }
+      
+      .step-number {
+        background-color: #ffb6c1;
+        color: #27251F;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        border-radius: 2px;
+      }
+      i { font-size: 18px; color: #888; }
+    }
+  }
+
+  // --- טבלת סיכום רחבה ומרווחת (פריסת מחירים משופרת) ---
+  .order-summary-wide {
+    background: white;
+    padding: 25px;
+    border-radius: 4px;
+
+    .summary-table-header {
+      display: grid;
+      grid-template-columns: 4fr 1fr 1fr;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eee;
+      font-weight: bold;
+      color: #888;
+      font-size: 14px;
+    }
+
+    .item-row {
+      display: grid;
+      grid-template-columns: 4fr 1fr 1fr;
+      align-items: center;
+      padding: 25px 0;
+      border-bottom: 1px solid #f9f9f9;
+
+      .item-info {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        .item-img { width: 80px; height: 80px; object-fit: cover; border-radius: 4px;}
+        .item-details {
+          display: flex;
+          flex-direction: column;
+          .name { font-weight: 600; font-size: 16px; }
+          .sku { font-size: 12px; color: #4caf50; margin-top: 5px; }
+        }
+      }
+      .col-qty, .col-price { font-size: 16px; font-weight: 600; }
+    }
+
+    .summary-totals {
+      margin-top: 30px;
+      padding-top: 25px;
+      border-top: 2px solid #f6f6f6;
+      width: 400px; // הרחבה של אזור המחירים למטה
+      margin-right: auto; // מוצמד לשמאל ב-RTL
+      text-align: right;
+
+      .total-row {
+        display: grid;
+        grid-template-columns: 2fr 1fr; // מרווח גדול יותר בין השם למחיר
+        margin-bottom: 15px;
+        font-size: 16px;
+        color: #555;
+        
+        .price-value { font-weight: 600; color: #000; }
+
+        &.grand-total {
+          margin-top: 20px;
+          font-size: 22px;
+          font-weight: 800;
+          color: #000;
+          border-top: 1px solid #eee;
+          padding-top: 15px;
+          
+          .price-value { color: #27251F; }
+        }
+      }
+    }
+  }
+
+  // --- אקורדיון תשלום מעוצב ---
+  .payment-accordion {
+    .payment-method-box {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      margin-bottom: 15px;
+      border-radius: 4px;
+      overflow: hidden;
+
+      .method-header {
+        padding: 25px;
+        cursor: pointer;
+        transition: background 0.2s;
+        &:hover { background: #fafafa; }
+
+        .header-right {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+          font-size: 18px;
+          font-weight: 600;
+          
+          i { font-size: 24px; color: #003087; } // PayPal כחול
+          .gpay-logo { height: 24px; }
+        }
+
+        .radio-indicator {
+          width: 22px;
+          height: 22px;
+          border: 2px solid #ccc;
+          border-radius: 50%;
+          position: relative;
+        }
+      }
+
+      &.active {
+        border: 2px solid #27251F; // גבול שחור חזק
+        .radio-indicator {
+          border-color: #27251F;
+          &::after {
+            content: '';
+            position: absolute;
+            top: 4px; left: 4px;
+            width: 10px; height: 10px;
+            background: #27251F;
+            border-radius: 50%;
+          }
+        }
+      }
+
+      .method-content {
+        padding: 30px;
+        border-top: 1px solid #eee;
+        background: #fcfcfc;
+        &.centered { text-align: center; padding: 40px; }
+        p { margin-bottom: 25px; color: #555; }
+      }
+    }
+  }
+
+  // --- טופס אשראי בגריד ---
+  .credit-card-form {
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      .full { grid-column: span 2; }
+    }
+
+    .input-field {
+      display: flex;
+      flex-direction: column;
+      label { font-size: 14px; margin-bottom: 8px; color: #555; font-weight: bold;}
+      input {
+        padding: 15px;
+        border: 1px solid #27251F;
+        border-radius: 4px;
+        font-size: 16px;
+        font-family: inherit;
+        &:focus { outline: none; box-shadow: 0 0 0 1px #27251F;}
+      }
+    }
+
+    .date-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      input { width: 90px; text-align: center; }
+      span { color: #eee; font-size: 20px;}
+    }
+  }
+
+  // --- כפתורים אותנטיים (צהוב לפייפאל וממותג גוגל) שביקשת ---
+  .paypal-payment-btn {
+    background-color: #ffc439; // צהוב פייפאל מקורי
+    color: #003087; // כחול פייפאל מקורי
+    border: none;
+    padding: 12px 40px;
+    border-radius: 30px; // עגול
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    
+    span { color: #003087; }
+    
+    &:hover { background-color: #e5ac31; }
+  }
+
+  .gpay-payment-btn {
+    background-color: white;
+    border: 1px solid #27251F;
+    border-radius: 4px;
+    padding: 10px 30px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    font-size: 18px;
+    
+    img { height: 26px; }
+    .plus { font-size: 24px; color: #27251F;}
+    
+    &:hover { background-color: #f9f9f9; border-color: #000; }
+  }
+
+  // --- כפתור שליחה סופי ---
+  .final-action {
+    text-align: center;
+    margin-top: 60px;
+    .terms-text { margin-bottom: 25px; font-size: 15px; color: #555; a { color: #000; text-decoration: underline; font-weight: bold; } }
+    
+    .btn-submit-order {
+      background: #000;
+      color: #fff;
+      padding: 20px 120px;
+      font-size: 20px;
+      font-weight: 700;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s;
+      
+      &:hover { background: #ffb6c1; color: #27251F; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1);}
+      &:disabled { background: #ccc; cursor: not-allowed; }
+    }
+  }
+  .price-value {
+  &.free {
+    color: #4caf50; // ירוק עדין לסימון משלוח חינם
+    font-weight: bold;
+  }
+}
+}

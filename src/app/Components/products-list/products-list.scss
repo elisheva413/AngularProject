@@ -1,0 +1,324 @@
+
+/* --- עיצוב כללי של העמוד --- */
+:host {
+  display: block;
+  font-family: 'Assistant', sans-serif;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+}
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  font-size: 14px;
+  margin-bottom: 24px;
+  font-weight: 400;
+}
+
+.breadcrumb-link {
+  color: #27251F;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.separator {
+  color: #767676;
+  font-size: 12px;
+}
+
+.breadcrumb-current {
+  color: #767676;
+}
+
+.header-section {
+  width: 96%;
+  max-width: 1600px;
+  margin: 40px auto 40px; 
+}
+
+.category-content {
+  text-align: right; 
+}
+
+.search-title {
+  font-size: 32px;
+  font-weight: 500;
+  color: #27251F;
+  margin: 0;
+  text-align: center;
+}
+
+.category-title {
+  font-size: 42px;
+  font-weight: 600;
+  color: #27251F;
+  margin: 0 0 16px 0;
+  text-transform: uppercase;
+}
+
+.category-desc {
+  font-size: 19px;
+  line-height: 1.6;
+  color: #555;
+  max-width: 650px;
+
+  p {
+    display: inline;
+    margin: 0;
+  }
+}
+
+.read-more-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin-right: 6px;
+  font-size: 14px;
+  color: #27251F;
+  text-decoration: underline;
+  cursor: pointer;
+  font-family: inherit;
+
+  &:hover {
+    color: #000;
+  }
+}
+
+
+.filter-toolbar-wrapper {
+  width: 100%;
+  border-top: 1px solid #e5e5e5;
+  padding-top: 18.5px; /* דוחף את הכפתורים למטה הרחק מהקו! */
+  margin-bottom:  0 0px; /* רווח נעים מהמוצרים שמתחת */
+}
+.filter-toolbar {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto 32px auto;
+  /* מחיקת ה- border-bottom לפי הבקשה שלך כדי שיהיה קו אחד בלבד! */
+  padding: 1px ;
+  display: flex;
+  align-items: center; /* מוודא שכולם יושבים באותו קו גובה */
+  justify-content: flex-start; 
+}
+
+.filter-sort-btn {
+  background: transparent;
+  border: none;
+  color: #555;;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px; 
+  padding: 0 8px;
+
+  &:hover {
+    color: #000;
+  }
+
+  i {
+    font-size: 18px;
+  }
+}
+
+/* הקו האפור האנכי המפריד */
+.toolbar-divider {
+  width: 1px;
+  height: 20px;
+  background-color: #e5e5e5;
+  margin: 0 24px;
+}
+
+
+.quick-filters {
+  display: flex;
+  gap: 32px; 
+  align-items: center;
+}
+
+.custom-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  color: #555; 
+
+  &:hover {
+    color: #000;
+  }
+
+  input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    accent-color: #ffb6c1;
+  }
+}
+/* ============================= */
+
+.pnd-grid {
+  width: 96%;
+  max-width: 1600px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 93px 16px; 
+  padding: 0 0 80px;
+}
+
+@media (max-width: 1200px) {
+  .pnd-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 88px 16px; 
+  }
+}
+
+@media (max-width: 900px) {
+  .pnd-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 100px 16px;
+  }
+}
+
+@media (max-width: 520px) {
+  .pnd-grid {
+    grid-template-columns: 1fr;
+    gap: 100px 16px;
+  }
+}
+
+.pnd-col {
+  display: block;
+}
+
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4); 
+  z-index: 999; 
+}
+
+.custom-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0; 
+  width: 500px; 
+  max-width: 100vw; 
+  height: 100vh;
+  background-color: #ffffff;
+  z-index: 1000;
+  box-shadow: -4px 0 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  
+  transform: translateX(100%); 
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
+
+  &.open {
+    transform: translateX(0);
+  }
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  color: #767676;
+  cursor: pointer;
+  padding: 4px;
+
+  &:hover {
+    color: #000;
+  }
+}
+
+.sidebar-content {
+  flex: 1;
+  overflow-y: auto; 
+  padding: 24px;
+}
+
+/* עיצוב לאנימציית הטעינה בזמן גלילה (Infinite Scroll) */
+.loading-more-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 40px 0 80px 0;
+  color: #767676;
+  font-size: 16px;
+
+  i {
+    font-size: 24px;
+    color: #27251F; /* שחור עדין */
+  }
+}
+
+/* --- עיצוב מצב אין תוצאות (Empty State) --- *//* --- עיצוב מצב אין תוצאות (Empty State) --- */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;     /* ממרכז בדיוק באמצע ציר ה-X */
+  margin: 40px auto 80px;  /* 40 פיקסלים מהטקסט שלמעלה, auto למרכז, ורווח למטה */
+  text-align: center;
+  color: #27251F;
+  width: 100%;
+  max-width: 600px;        /* שומר שהטקסט יהיה ארוז יפה באמצע */
+
+  i {
+    font-size: 50px;
+    color: #e0e0e0;
+    margin-bottom: 25px;
+  }
+
+  h3 {
+    font-size: 24px;
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  p {
+    font-size: 16px;
+    color: #767676;
+    margin-bottom: 35px;
+  }
+
+  .btn-clear-empty {
+    padding: 12px 35px;
+    background-color: #ffb6c1; /* הוורוד של פנדורה! */
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+
+    &:hover {
+      background-color: #333;
+      color: #fff;
+    }
+  }
+}

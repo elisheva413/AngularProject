@@ -1,0 +1,251 @@
+.profile-wrapper {
+  background-color: #f9f9f9;
+  min-height: 100vh;
+  padding: 50px 5%;
+  font-family: 'Assistant', sans-serif;
+
+  .container-orders-only {
+    max-width: 950px;
+    margin: 0 auto;
+  }
+}
+
+/* ספינר טעינה */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px;
+  i { font-size: 2rem; color: #ffb6c1; margin-bottom: 10px; }
+  span { color: #888; font-weight: 600; }
+}
+
+/* אזור הזמנות - העיצוב המקורי שלך */
+.orders-section {
+  .section-title {
+    font-size: 1.8rem;
+    color: #27251F;
+    margin-bottom: 25px;
+    font-weight: 700;
+  }
+
+  .order-card-flat {
+    background: #ffffff;
+    margin-bottom: 20px;
+    border-radius: 2px;
+    border: 1px solid #eaeaea;
+    overflow: hidden;
+
+    &.expanded { border: 1px solid #27251F; }
+
+    .order-summary-row {
+      padding: 25px 30px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr; 
+      align-items: center;
+      cursor: pointer;
+      background: #ffffff;
+      transition: background 0.2s;
+      
+      &:hover { background: #fcfcfc; }
+
+      .order-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        justify-self: start; 
+        .order-id { font-weight: 700; font-size: 1.1rem; color: #27251F; }
+        .order-date { color: #888; font-size: 0.9rem; }
+      }
+
+      .order-actions {
+        justify-self: center; 
+        
+        .status-badge {
+          font-size: 15px;
+          font-weight: 700;
+          color: #888;
+          &.shipped { color: #888; }
+          i { margin-left: 5px; }
+        }
+
+        /* --- הכפתורים החדשים והלחוצים לנצח --- */
+        .btn-delivery-active {
+          background: #27251F;
+          color: #ffffff;
+          border: none;
+          padding: 10px 30px;
+          font-size: 15px;
+          font-weight: 700;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          border-radius: 2px;
+          &:hover { background: #ffb6c1; color: #27251F; }
+        }
+
+        .btn-delivery-pressed {
+          background: #f0f0f0;
+          color: #a0a0a0;
+          border: 1px solid #e0e0e0;
+          padding: 10px 30px;
+          font-size: 15px;
+          font-weight: 700;
+          cursor: default;
+          border-radius: 2px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          i { color: #ffb6c1; }
+        }
+
+        .admin-badge-received {
+          color: #27251F;
+          font-weight: 700;
+          i { color: #ffb6c1; margin-left: 5px; }
+        }
+      }
+
+      .order-price-arrow {
+        display: flex;
+        align-items: center;
+        justify-self: end; 
+        gap: 15px;
+        .total-price { font-weight: 700; font-size: 1.2rem; color: #27251F; }
+        i { color: #888; font-size: 0.9rem; }
+      }
+    }
+
+    /* הסטפר המקורי לחלוטין - כולל ה-margin-top הנדרש! */
+    .cute-stepper-flat {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 30px 40px;
+      background: #fdfdfd;
+      border-top: 1px solid #eaeaea;
+      border-bottom: 1px solid #eaeaea;
+
+      .step {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        color: #b0b0b0; 
+        
+        .circle {
+          width: 45px;
+          height: 45px;
+          border-radius: 50%; 
+          background: #f0f0f0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.2rem; 
+          transition: background-color 0.3s ease;
+        }
+
+        span { font-weight: 600; font-size: 0.95rem; }
+
+        &.active {
+          color: #27251F;
+          .circle { 
+            background: #ffb6c1; 
+            color: #27251F; 
+          }
+        }
+      }
+
+      .line {
+        flex: 1;
+        height: 3px; 
+        background: #f0f0f0;
+        margin: 0 15px;
+        margin-top: -25px; /* הנה זה! הפס חזר לאמצע! */
+        transition: background-color 0.3s ease;
+
+        &.active { background: #ffb6c1; }
+      }
+    }
+
+    /* ההודעה הדיגיטלית המקורית */
+    .digital-delivery-notice {
+      padding: 20px;
+      background: #f6f6f6;
+      border-top: 1px solid #eaeaea;
+      border-bottom: 1px solid #eaeaea;
+      text-align: center;
+      color: #27251F;
+      font-weight: 700;
+      i { margin-left: 8px; color: #ffb6c1; }
+    }
+
+    /* הגריד המקורי לחלוטין */
+    .flat-items-grid {
+      padding: 20px 30px;
+
+      .item-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 0;
+        border-bottom: 1px solid #eaeaea;
+        
+        &:last-child { border-bottom: none; }
+
+        .item-right-side {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+          flex: 1; 
+
+          .item-thumb {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 2px;
+            border: 1px solid #eaeaea;
+            order: 1; 
+          }
+
+          .item-info {
+            display: flex;
+            flex-direction: column; /* חזר! עכשיו זה שתי שורות */
+            gap: 5px;
+            order: 2; 
+            text-align: right;
+            .name { font-weight: 700; color: #27251F; font-size: 1.05rem; }
+            .meta { color: #888; font-size: 0.9rem; }
+          }
+        }
+
+        .item-left-side {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          gap: 3px;
+          .price { font-weight: 700; font-size: 1.15rem; color: #27251F; }
+          .unit-price { color: #888; font-size: 0.85rem; }
+        }
+      }
+    }
+
+    .admin-panel {
+      padding: 20px 30px;
+      background: #fff;
+      border-top: 1px solid #eaeaea;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+
+      label { font-weight: 700; color: #27251F; }
+      .flat-select {
+        padding: 8px 15px;
+        border: 1px solid #27251F;
+        border-radius: 2px;
+        font-family: inherit;
+        outline: none;
+        &:disabled { background: #f9f9f9; color: #aaa; border-color: #ddd; }
+      }
+    }
+  }
+}

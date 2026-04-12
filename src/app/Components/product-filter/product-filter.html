@@ -1,0 +1,64 @@
+<div class="filter-inner-content">
+  
+  <details>
+    <summary>מתכת</summary>
+    <div class="color-list">
+      <div class="color-row" 
+           *ngFor="let m of materials" 
+           (click)="toggleMaterial(m.value)" 
+           [class.active]="selectedMaterials.includes(m.value)">
+        <span class="color-circle" [ngClass]="m.cssClass"></span>
+        <span class="color-name">{{ m.name }}</span>
+      </div>
+    </div>
+  </details>
+
+  <hr>
+
+  <details>
+    <summary>צבע</summary>
+    <div class="color-list">
+      <div class="color-row" 
+           *ngFor="let c of colors" 
+           (click)="toggleColor(c.value)" 
+           [class.active]="selectedColors.includes(c.value)">
+        <span class="color-circle" [ngClass]="c.cssClass"></span>
+        <span class="color-name">{{ c.name }}</span>
+      </div>
+    </div>
+  </details>
+
+  <hr>
+
+  <details>
+    <summary>מחיר</summary>
+    <div class="price-range-wrapper">
+      <div class="price-labels">
+        <span>₪{{minPrice}}</span>
+        <span>₪{{maxPrice}}</span>
+      </div>
+      
+      <div class="dual-slider-container">
+        <div class="slider-track-bg"></div>
+        <div class="slider-track-fill"
+             [style.right.%]="(minPrice / maxLimit) * 100"
+             [style.width.%]="((maxPrice - minPrice) / maxLimit) * 100">
+        </div>
+
+        <input type="range" [min]="0" [max]="maxLimit" step="10"
+               [(ngModel)]="minPrice" (input)="onMinInput()" (change)="onPriceDragEnd()" class="range-input">
+               
+        <input type="range" [min]="0" [max]="maxLimit" step="10"
+               [(ngModel)]="maxPrice" (input)="onMaxInput()" (change)="onPriceDragEnd()" class="range-input">
+      </div>
+    </div>
+  </details>
+
+</div>
+
+<div class="filter-actions">
+  <button class="btn-clear-all" (click)="onReset()">
+    <span>ניקוי</span>
+    <i class="pi pi-filter-slash"></i>
+  </button>
+</div>

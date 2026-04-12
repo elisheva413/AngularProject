@@ -1,0 +1,97 @@
+.admin-dashboard {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .dashboard-header {
+    text-align: center;
+    margin-bottom: 3rem;
+
+    h1 {
+      font-size: 2.5rem;
+      color: #1f2937;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: #6b7280;
+      font-size: 1.1rem;
+    }
+  }
+  .admin-card {
+   
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    
+    .card-icon {
+      background: #fdf2f8 !important; 
+      i {
+        color: #be185d !important; 
+      }
+    }
+    ::ng-deep .p-button {
+      background: #fdf2f8 !important; 
+      border: 1px solid #fbcfe8 !important; 
+      color: #000000 !important; 
+      font-weight: 600;
+      width: 100%;
+
+      .p-button-icon {
+        color: #be185d !important; 
+      }
+
+      &:hover {
+        background: #fce7f3 !important; 
+        border-color: #be185d !important;
+      }
+    }
+
+    h3 {
+      color: #000000 !important; 
+    }
+  }
+
+  .dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+
+    .admin-card {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      text-align: center;
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .card-icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1.5rem;
+
+        i {
+          font-size: 2.5rem;
+          color: white;
+        }
+      }
+
+      h3 {
+        font-size: 1.5rem;
+        color: #1f2937;
+        margin-bottom: 1.5rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,459 @@
+<!-- 
+<div *ngIf="toastMessage" class="p-toast">
+
+    <div class="p-toast-message">
+
+        <span class="p-toast-icon">✅</span>
+
+        <div>
+
+            <span class="p-toast-summary">הצלחה</span>
+
+            <span class="p-toast-detail">{{ toastMessage }}</span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<div class="admin-container">
+
+   
+
+    <div class="header-section">
+
+        <h2>ניהול מלאי תכשיטים - פנדורה</h2>
+
+        <button (click)="openAdd()" class="btn-primary">
+
+            <span>+</span> הוסף מוצר חדש
+
+        </button>
+
+    </div>
+
+
+
+    <div class="datatable-wrapper">
+
+        <table class="p-datatable">
+
+            <thead>
+
+                <tr>
+
+                    <th style="width: 140px;">תמונות</th>
+
+                    <th class="product-name-header">שם מוצר</th>
+
+                    <th>מחיר</th>
+
+                    <th>מלאי</th>
+
+                    <th>סטטוס</th>
+
+                    <th style="text-align: center; width: 120px;">פעולות</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr *ngFor="let p of products">
+
+                    <td>
+
+                        <div class="table-images-container">
+
+                            <img [src]="getImageUrl(p.imgUrl, p.productsName)" class="product-image" alt="Product Image 1" onerror="this.src='/images/no-image.png'">
+
+                            <img *ngIf="p.imgUrl2" [src]="getImageUrl(p.imgUrl2, p.productsName)" class="product-image" alt="Product Image 2" onerror="this.src='/images/no-image.png'">
+
+                        </div>
+
+                    </td>
+
+                    <td class="font-bold product-name-cell">{{p.productsName}}</td>
+
+                    <td class="price-text">₪{{p.price}}</td>
+
+                    <td>{{p.quantity}} יחידות</td>
+
+                    <td>
+
+                        <span [class]="p.isActive ? 'status-badge status-active' : 'status-badge status-inactive'">
+
+                            {{ p.isActive ? 'פעיל' : 'לא פעיל' }}
+
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <div class="action-buttons">
+
+                            <button (click)="deleteProduct(p)" class="btn-icon delete-btn" title="מחק">
+
+                                <i class="pi pi-trash"></i>
+
+                            </button>
+
+                            <button (click)="openEdit(p)" class="btn-icon edit-btn" title="ערוך">
+
+                                <i class="pi pi-pencil"></i>
+
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+
+
+        <div class="p-paginator" *ngIf="totalCount > 0">
+
+            <div class="paginator-info">
+
+                מציג {{ currentPage * pageSize + 1 }} עד {{ Math.min((currentPage + 1) * pageSize, totalCount) }} מתוך {{ totalCount }} מוצרים
+
+            </div>
+
+           
+
+            <div class="paginator-buttons">
+
+                <button (click)="goToFirst()" [disabled]="currentPage === 0" class="paginator-btn">«</button>
+
+                <button (click)="prevPage()" [disabled]="currentPage === 0" class="paginator-btn">‹</button>
+
+               
+
+                <span class="page-number">עמוד {{ currentPage + 1 }} מתוך {{ totalPages }}</span>
+
+               
+
+                <button (click)="nextPage()" [disabled]="(currentPage + 1) * pageSize >= totalCount" class="paginator-btn">›</button>
+
+                <button (click)="goToLast()" [disabled]="(currentPage + 1) * pageSize >= totalCount" class="paginator-btn">»</button>
+
+            </div>
+
+        </div>
+
+       
+
+        <div *ngIf="products.length === 0" style="padding: 2rem; text-align: center; color: #6c757d;">
+
+            אין מוצרים להצגה. לחצי על "הוסף מוצר" כדי להתחיל.
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<div *ngIf="displayDialog" class="p-dialog-mask">
+
+    <div class="p-dialog">
+
+       
+
+        <div class="p-dialog-header">
+
+            <h3>{{isEditMode ? 'עריכת מוצר' : 'הוספת מוצר חדש'}}</h3>
+
+            <button (click)="closeDialog()" class="p-dialog-close">×</button>
+
+        </div>
+
+       
+
+        <div class="p-dialog-content p-fluid">
+
+           
+
+            <div class="field">
+
+                <label>שם המוצר *</label>
+
+                <input type="text" [(ngModel)]="productForm.productsName" placeholder="עגילי פנינה קלאסיים">
+
+            </div>
+
+           
+
+            <div class="p-grid-2">
+
+                <div class="field">
+
+                    <label>קטגוריה *</label>
+
+                    <select [(ngModel)]="productForm.categoryId">
+
+                        <option [ngValue]="null">בחר קטגוריה...</option>
+
+                        <option *ngFor="let cat of categories" [ngValue]="cat.categoryId">{{cat.categoryName}}</option>
+
+                    </select>
+
+                </div>
+
+                <div class="field">
+
+                    <label>מחיר *</label>
+
+                    <input type="number" [(ngModel)]="productForm.price" placeholder="₪">
+
+                </div>
+
+            </div>
+
+
+
+            <div class="p-grid-2">
+
+                <div class="field">
+
+                    <label>צבעים (מופרדים בפסיק)</label>
+
+                    <input type="text" [(ngModel)]="productForm.color" placeholder="זהב, כסף...">
+
+                </div>
+
+                <div class="field">
+
+                    <label>חומר</label>
+
+                    <input type="text" [(ngModel)]="productForm.material" placeholder="זהב 14K...">
+
+                </div>
+
+            </div>
+
+
+
+            <div class="field">
+
+                <label>תיאור</label>
+
+                <textarea [(ngModel)]="productForm.productsDescreption" rows="3" placeholder="פרטי המוצר..."></textarea>
+
+            </div>
+
+
+
+            <div class="field file-upload-section">
+
+                <div class="file-input-wrapper">
+
+                    <label class="font-bold">תמונה 1:</label>
+
+                    <input type="file" (change)="onFileUpload($event, 1)">
+
+                    <img *ngIf="productForm.imgUrl" [src]="getImageUrl(productForm.imgUrl, productForm.productsName)" class="image-preview-thumb">
+
+                </div>
+
+                <div class="file-input-wrapper">
+
+                    <label class="font-bold">תמונה 2:</label>
+
+                    <input type="file" (change)="onFileUpload($event, 2)">
+
+                    <img *ngIf="productForm.imgUrl2" [src]="getImageUrl(productForm.imgUrl2, productForm.productsName)" class="image-preview-thumb">
+
+                </div>
+
+            </div>
+
+
+
+            <div class="field p-grid-checkbox">
+
+                <input type="checkbox" [(ngModel)]="productForm.isActive">
+
+                <label>מוצר פעיל באתר (יופיע למכירה)</label>
+
+                <label style="margin-right: auto;">מלאי: <input type="number" [(ngModel)]="productForm.quantity" style="width: 70px; display: inline-block; padding: 5px;"></label>
+
+            </div>
+
+
+
+        </div>
+
+
+
+        <div class="p-dialog-footer">
+
+            <button (click)="closeDialog()" class="btn-secondary">ביטול</button>
+
+            <button (click)="saveProduct()" [disabled]="uploading" class="btn-primary">
+
+                {{uploading ? 'מעלה...' : ' שמור '}}
+
+            </button>
+
+        </div>
+
+       
+
+    </div>
+
+</div> -->
+<div *ngIf="toastMessage" class="p-toast">
+    <div class="p-toast-message">
+        <span class="p-toast-icon">✅</span>
+        <div>
+            <span class="p-toast-summary">הצלחה</span>
+            <span class="p-toast-detail">{{ toastMessage }}</span>
+        </div>
+    </div>
+</div>
+
+<div class="admin-container">
+    <div class="header-section">
+        <h2>ניהול מלאי תכשיטים - פנדורה</h2>
+        <button (click)="openAdd()" class="btn-primary">
+            <span>+</span> הוסף מוצר חדש
+        </button>
+    </div>
+
+    <div class="datatable-wrapper">
+        <table class="p-datatable">
+            <thead>
+                <tr>
+                    <th style="width: 140px;">תמונות</th>
+                    <th class="product-name-header">שם מוצר</th>
+                    <th>מחיר</th>
+                    <th>מלאי</th>
+                    <th>סטטוס</th>
+                    <th style="text-align: center; width: 120px;">פעולות</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let p of products">
+                    <td>
+                        <div class="table-images-container">
+                            <img [src]="getImageUrl(p.imgUrl, p.productsName)" class="product-image" alt="Product Image 1" onerror="this.src='/images/no-image.png'">
+                            <img *ngIf="p.imgUrl2" [src]="getImageUrl(p.imgUrl2, p.productsName)" class="product-image" alt="Product Image 2" onerror="this.src='/images/no-image.png'">
+                        </div>
+                    </td>
+                    <td class="font-bold product-name-cell">{{p.productsName}}</td>
+                    <td class="price-text">₪{{p.price}}</td>
+                    <td>{{p.quantity}} יחידות</td>
+                    <td>
+                        <span [class]="p.isActive ? 'status-badge status-active' : 'status-badge status-inactive'">
+                            {{ p.isActive ? 'פעיל' : 'לא פעיל' }}
+                        </span>
+                    </td>
+                    <td>
+                        <div class="action-buttons">
+                            <button (click)="deleteProduct(p)" class="btn-icon delete-btn" title="מחק">
+                                <i class="pi pi-trash"></i>
+                            </button>
+                            <button (click)="openEdit(p)" class="btn-icon edit-btn" title="ערוך">
+                                <i class="pi pi-pencil"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="p-paginator" *ngIf="totalCount > 0">
+            <div class="paginator-info">
+                מציג {{ currentPage * pageSize + 1 }} עד {{ Math.min((currentPage + 1) * pageSize, totalCount) }} מתוך {{ totalCount }} מוצרים
+            </div>
+            <div class="paginator-buttons">
+                <button (click)="goToFirst()" [disabled]="currentPage === 0" class="paginator-btn">«</button>
+                <button (click)="prevPage()" [disabled]="currentPage === 0" class="paginator-btn">‹</button>
+                <span class="page-number">עמוד {{ currentPage + 1 }} מתוך {{ totalPages }}</span>
+                <button (click)="nextPage()" [disabled]="(currentPage + 1) * pageSize >= totalCount" class="paginator-btn">›</button>
+                <button (click)="goToLast()" [disabled]="(currentPage + 1) * pageSize >= totalCount" class="paginator-btn">»</button>
+            </div>
+        </div>
+
+        <div *ngIf="products.length === 0" style="padding: 2rem; text-align: center; color: #6c757d;">
+            אין מוצרים להצגה. לחצי על "הוסף מוצר" כדי להתחיל.
+        </div>
+    </div>
+</div>
+
+<div *ngIf="displayDialog" class="p-dialog-mask">
+    <div class="p-dialog">
+        <div class="p-dialog-header">
+            <h3>{{isEditMode ? 'עריכת מוצר' : 'הוספת מוצר חדש'}}</h3>
+            <button (click)="closeDialog()" class="p-dialog-close">×</button>
+        </div>
+        <div class="p-dialog-content p-fluid">
+            <div class="field">
+                <label>שם המוצר *</label>
+                <input type="text" [(ngModel)]="productForm.productsName" placeholder="עגילי פנינה קלאסיים">
+            </div>
+            <div class="p-grid-2">
+                <div class="field">
+                    <label>קטגוריה *</label>
+                    <select [(ngModel)]="productForm.categoryId">
+                        <option [ngValue]="null">בחר קטגוריה...</option>
+                        <option *ngFor="let cat of categories" [ngValue]="cat.categoryId">{{cat.categoryName}}</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>מחיר *</label>
+                    <input type="number" [(ngModel)]="productForm.price" placeholder="₪">
+                </div>
+            </div>
+            <div class="p-grid-2">
+                <div class="field">
+                    <label>צבעים (מופרדים בפסיק)</label>
+                    <input type="text" [(ngModel)]="productForm.color" placeholder="זהב, כסף...">
+                </div>
+                <div class="field">
+                    <label>חומר</label>
+                    <input type="text" [(ngModel)]="productForm.material" placeholder="זהב 14K...">
+                </div>
+            </div>
+            <div class="field">
+                <label>תיאור</label>
+                <textarea [(ngModel)]="productForm.productsDescreption" rows="3" placeholder="פרטי המוצר..."></textarea>
+            </div>
+            <div class="field file-upload-section">
+                <div class="file-input-wrapper">
+                    <label class="font-bold">תמונה 1:</label>
+                    <input type="file" (change)="onFileUpload($event, 1)">
+                    <img *ngIf="productForm.imgUrl" [src]="getImageUrl(productForm.imgUrl, productForm.productsName)" class="image-preview-thumb">
+                </div>
+                <div class="file-input-wrapper">
+                    <label class="font-bold">תמונה 2:</label>
+                    <input type="file" (change)="onFileUpload($event, 2)">
+                    <img *ngIf="productForm.imgUrl2" [src]="getImageUrl(productForm.imgUrl2, productForm.productsName)" class="image-preview-thumb">
+                </div>
+            </div>
+            <div class="field p-grid-checkbox">
+                <input type="checkbox" [(ngModel)]="productForm.isActive">
+                <label>מוצר פעיל באתר (יופיע למכירה)</label>
+                <label style="margin-right: auto;">מלאי: <input type="number" [(ngModel)]="productForm.quantity" style="width: 70px; display: inline-block; padding: 5px;"></label>
+            </div>
+        </div>
+        <div class="p-dialog-footer">
+            <button (click)="closeDialog()" class="btn-secondary">ביטול</button>
+            <button (click)="saveProduct()" [disabled]="uploading" class="btn-primary">
+                {{uploading ? 'מעלה...' : ' שמור '}}
+            </button>
+        </div>
+    </div>
+</div>

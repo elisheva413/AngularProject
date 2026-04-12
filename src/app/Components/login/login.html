@@ -1,0 +1,56 @@
+<div class="auth-container">
+  <div class="auth-section login-box">
+    <h1 style="font-family: 'Assistant', sans-serif;">היי</h1>
+    <p>כיף לראות אותך פה!</p>
+      
+    <div class="form-container">
+      <div class="field">
+        <p-floatLabel>
+          <input 
+            pInputText 
+            id="email" 
+            type="email" 
+            name="email"
+            [(ngModel)]="loginData.email" 
+            class="w-full underline-input" 
+            autocomplete="username" />
+          <label for="email">אימייל וממשיכים...</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="field">
+        <p-floatLabel>
+          <p-password 
+            id="password" 
+            name="password"
+            [(ngModel)]="loginData.password" 
+            [feedback]="false" 
+            [toggleMask]="true" 
+            styleClass="w-full" 
+            inputStyleClass="w-full underline-input"
+            autocomplete="current-password">
+          </p-password>
+          <label for="password">סיסמה</label>
+        </p-floatLabel>
+      </div>
+
+      <button pButton label="התחברות" (click)="onLogin()" class="p-button-pink w-full"></button>
+    </div>
+
+    <div class="social-auth">
+      <p>או התחברו באמצעות</p>
+      <div class="social-buttons">
+        <button pButton icon="pi pi-google" routerLink="/netfree" class="p-button-outlined p-button-secondary"></button>
+        <button pButton icon="pi pi-facebook" routerLink="/netfree" class="p-button-outlined p-button-secondary"></button>
+      </div>
+    </div>
+  </div>
+
+  <p-divider layout="vertical" class="divider-desktop"></p-divider>
+
+  <div class="auth-section info-box">
+    <h3>לקוח חדש?</h3>
+    <p>הצטרפו אלינו ותיהנו מחוויית קנייה אישית.</p>
+    <button pButton label="ליצירת חשבון חדש" routerLink="/register" class="p-button-outlined-black w-full"></button>
+  </div>
+</div>

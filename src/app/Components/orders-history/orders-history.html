@@ -1,0 +1,114 @@
+<div class="profile-wrapper" dir="rtl">
+  <div class="container-orders-only">
+    
+    <div *ngIf="isLoading" class="loading-container">
+      <i class="pi pi-spin pi-spinner"></i>
+      <span>מעדכן נתונים...</span>
+    </div>
+
+    <section class="orders-section" *ngIf="!isLoading">
+      <h2 class="section-title">{{ isAdmin ? 'ניהול הזמנות מערכת (אדמין)' : 'היסטוריית הקניות שלי' }}</h2>
+      
+      <div class="orders-list">
+        <div class="order-card-flat" *ngFor="let order of orders" [class.expanded]="openOrderId === order.orderId">
+          
+          <div class="order-summary-row" (click)="toggleOrder(order.orderId)">
+            <div class="order-meta">
+              <span class="order-id">הזמנה #{{order.orderId}}</span>
+              <span class="order-date">{{order.orderDate | date:'dd/MM/yyyy'}}</span>
+            </div>
+            
+            <div class="order-actions" (click)="$event.stopPropagation()">
+              <ng-container *ngIf="!isAdmin && !isDigitalOrder(order)">
+                
+                <button class="btn-delivery-active" 
+                        *ngIf="order.orderStatus === 'Delivered'" 
+                        (click)="confirmArrival(order)">
+                 החבילה נמסרה
+                </button>
+
+                <button class="btn-delivery-pressed" 
+                        *ngIf="order.orderStatus === 'Received'" disabled>
+                  <i class="pi pi-check"></i> החבילה נמסרה
+                </button>
+
+                <div class="status-badge shipped" *ngIf="order.orderStatus === 'Shipped'">
+                  <i class="pi pi-truck"></i> בדרך אלייך
+                </div>
+              </ng-container>
+
+              <ng-container *ngIf="isAdmin">
+                <div class="admin-badge-received" *ngIf="order.orderStatus === 'Received'">
+                  <i class="pi pi-verified"></i> הלקוח אישר מסירה
+                </div>
+              </ng-container>
+            </div>
+
+            <div class="order-price-arrow">
+              <span class="total-price">₪{{order.orderSum | number:'1.2-2'}}</span>
+              <i class="pi" [ngClass]="openOrderId === order.orderId ? 'pi-chevron-up' : 'pi-chevron-down'"></i>
+            </div>
+          </div>
+
+          <div class="order-details" *ngIf="openOrderId === order.orderId">
+            
+            <div class="cute-stepper-flat" *ngIf="!isDigitalOrder(order)">
+              <div class="step" [class.active]="true">
+                <div class="circle"><i class="pi pi-credit-card"></i></div>
+                <span>שולם</span>
+              </div>
+              
+              <div class="line" [class.active]="order.orderStatus === 'Shipped' || order.orderStatus === 'Delivered' || order.orderStatus === 'Received'"></div>
+              
+              <div class="step" [class.active]="order.orderStatus === 'Shipped' || order.orderStatus === 'Delivered' || order.orderStatus === 'Received'">
+                <div class="circle"><i class="pi pi-truck" *ngIf="order.orderStatus !== 'Paid'"></i></div>
+                <span>נשלח</span>
+              </div>
+              
+              <div class="line" [class.active]="order.orderStatus === 'Delivered' || order.orderStatus === 'Received'"></div>
+              
+              <div class="step" [class.active]="order.orderStatus === 'Delivered' || order.orderStatus === 'Received'">
+                <div class="circle"><i class="pi pi-check" *ngIf="order.orderStatus === 'Delivered' || order.orderStatus === 'Received'"></i></div>
+                <span>סופק</span>
+              </div>
+            </div>
+
+            <div class="digital-delivery-notice" *ngIf="isDigitalOrder(order)">
+              <i class="pi pi-envelope"></i>
+              <span>המתנה הדיגיטלית נשלחה בהצלחה למקבל.</span>
+            </div>
+
+            <div class="flat-items-grid">
+              <div class="item-row" *ngFor="let item of order.ordersItems">
+                <div class="item-right-side">
+                    <img [src]="getProductImagePath(item.productImage, item.productName)" class="item-thumb" alt="Product">
+                      <div class="item-info">
+                        <span class="name">{{item.productName}}</span>
+                        <span class="meta">כמות: {{item.quantity}}</span>
+                      </div>
+                 </div>
+                <div class="item-left-side">
+                  <span class="price">₪{{(item.price * item.quantity) | number:'1.2-2'}}</span>
+                  <span class="unit-price" *ngIf="item.quantity > 1">(₪{{item.price | number:'1.2-2'}} ליחידה)</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="admin-panel" *ngIf="isAdmin && !isDigitalOrder(order)">
+              <label>סטטוס משלוח (מנהל):</label>
+              <select class="flat-select" 
+                      [disabled]="order.orderStatus === 'Received'"
+                      (change)="onStatusChange(order, $any($event.target).value)">
+                <option [selected]="order.orderStatus === 'Paid'" value="Paid">שולם (ממתין לטיפול)</option>
+                <option [selected]="order.orderStatus === 'Shipped'" value="Shipped">נשלח (בדרך ללקוח)</option>
+                <option [selected]="order.orderStatus === 'Delivered'" value="Delivered">סופק</option>
+                <!-- <option [selected]="order.orderStatus === 'Received'" value="Received" disabled>אושר ע"י הלקוח</option> -->
+              </select>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

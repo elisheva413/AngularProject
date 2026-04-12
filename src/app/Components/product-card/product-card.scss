@@ -1,0 +1,82 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.media {
+  position: relative;
+  background: #f5f5f3f8;
+  /* כאן הקסם: שינינו ממרובע (1/1) למלבן מוארך ויוקרתי (4/5) */
+  aspect-ratio: 4 / 5; 
+  overflow: hidden;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  padding: 10%; /* נותן מעט אוויר מסביב לתכשיט שלא יידבק לקצוות */
+}
+
+/* העיצוב של כפתור הסל השחור למעלה */
+.top-cart-btn {
+  position: absolute;
+  right: 14px;
+  top: 14px;
+  
+  /* הפכנו אותו לעיגול מושלם כדי שהמילוי הוורוד ייראה טוב */
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #27251F; 
+  font-size: 18px; /* קצת יותר עדין מ-20 כדי לשבת יפה בעיגול */
+  z-index: 2;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  &:hover {
+    color: #000;
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.8); /* רקע לבן חצי שקוף בהובר כדי לבלוט על התמונה */
+  }
+
+  /* === הקסם: מצב "נוסף לסל" === */
+  &.added {
+    background-color: #ffb6c1; /* ורוד פנדורה! */
+    color: #000; /* אייקון שחור */
+    transform: scale(1.15); /* קופץ קצת החוצה */
+    box-shadow: 0 4px 12px rgba(255, 182, 193, 0.6); /* הילה ורודה עדינה */
+  }
+}
+
+.info {
+  text-align: center;
+  padding: 0 6px;
+}
+
+.name {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.35;
+  color: #27251F;
+}
+
+.price {
+  margin-top: 6px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #27251F;
+}
+.img-wrapper-link, .name-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}

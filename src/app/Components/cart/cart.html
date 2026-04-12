@@ -1,0 +1,80 @@
+<div class="cart-page-container" dir="rtl">
+  <div class="cart-card">
+    
+    <div class="cart-header">
+      <h1>סל הקניות שלי</h1>
+      <span class="item-count">{{ cartItems.length }} פריטים</span>
+    </div>
+
+    <div class="cart-content" *ngIf="cartItems.length > 0; else emptyCart">
+      <div class="cart-items-list">
+        <div *ngFor="let item of cartItems" class="cart-item">
+          
+          <div class="item-image">
+            <img [src]="getProductImagePath(item)" 
+                 [alt]="item.product.productsName">
+          </div>
+          
+          <div class="item-details">
+            <h3 class="product-name">{{ item.product.productsName }}</h3>
+            <p class="product-price">{{ item.product.price | number:'1.2-2' }} ₪</p>
+          </div>
+
+          <div class="item-actions">
+            <button class="btn-delete" (click)="removeItem(item.product.productsId)" title="הסר פריט">
+              <i class="pi pi-trash"></i>
+            </button>
+
+            <div class="quantity-selector">
+              <button class="qty-btn" 
+                      (click)="updateQuantity(item.product.productsId, item.selectedQuantity + 1)" 
+                      [disabled]="item.selectedQuantity >= item.product.quantity">+</button>
+              <span class="qty-value">{{ item.selectedQuantity }}</span>
+              <button class="qty-btn" 
+                      (click)="updateQuantity(item.product.productsId, item.selectedQuantity - 1)" 
+                      [disabled]="item.selectedQuantity <= 1">−</button>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+      <div class="cart-summary">
+        <h3>סיכום הזמנה</h3>
+        <div class="summary-row">
+          <span>סכום ביניים:</span>
+          <span>{{ getTotalPrice() | number:'1.2-2' }} ₪</span>
+        </div>
+        <div class="summary-row">
+          <span>משלוח:</span>
+          <span [ngClass]="getShippingCost() === 0 ? 'free-shipping' : 'standard-shipping'">
+            {{ getShippingCost() === 0 ? 'חינם' : (getShippingCost() | number:'1.2-2') + ' ₪' }}
+          </span>
+        </div>
+        <hr class="summary-divider">
+        <div class="summary-row total">
+          <span>סה"כ לתשלום:</span>
+          <span>{{ getFinalTotal() | number:'1.2-2' }} ₪</span>
+        </div>
+        <button class="simple-btn-checkout" (click)="proceedToCheckout()">המשך לתשלום</button>
+      </div>
+    </div>
+
+    <ng-template #emptyCart>
+      <div class="empty-state">
+        <div class="empty-icon-wrapper">
+          <svg width="100" height="100" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="25" y="45" width="70" height="50" rx="6" stroke="#f6cad3" stroke-width="6" fill="transparent"/>
+            <path d="M40 45 V35 C40 24 49 16 60 16 C71 16 80 24 80 35 V55" stroke="#f6cad3" stroke-width="6" stroke-linecap="round" fill="transparent"/>
+          </svg>
+        </div>
+        <h2>הסל שלך ריק</h2>
+        <p class="empty-subtitle">נראה שעדיין לא הוספת פריטים לסל שלך.</p>
+        <button class="simple-btn-return" routerLink="/products">
+          חזרה לחנות <i class="pi pi-arrow-left"></i>
+        </button>
+      </div>
+    </ng-template>
+
+  </div>
+</div>

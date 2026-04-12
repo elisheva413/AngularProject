@@ -1,0 +1,6 @@
+<app-menu *ngIf="!isNetfreePage"></app-menu>
+
+<router-outlet></router-outlet>
+<a routerLink="/products"></a>
+
+<app-footer *ngIf="!isNetfreePage"></app-footer>

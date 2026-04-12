@@ -1,0 +1,136 @@
+.netfree-screen {
+  position: fixed;
+  inset: 0; 
+  background-color: white !important;
+  z-index: 999999;
+  font-family: 'Assistant', sans-serif;
+  overflow: hidden; 
+
+  /* --- עיצוב דסקטופ (מסך רחב) --- */
+  
+  .top-logo {
+    position: absolute;
+    top: 40px; /* נשאר ב-40 כדי לשמור על מרחק מהקצה */
+    left: 40px; 
+    height: 50px;
+    z-index: 10;
+  }
+
+  .text-container {
+    position: absolute;
+    /* הועלה ל-28px כדי לפצות על הרווח המובנה של האותיות הגדולות */
+    top: 28px; 
+    right: 40px; 
+    z-index: 10;
+    text-align: right; 
+
+    .oops-title {
+      font-size: 10rem;
+      font-weight: 800;
+      color: #f2dede; 
+      margin: 0;
+      padding: 0; /* ביטול פדינגים מיותרים */
+      line-height: 0.8; /* צמצום גובה השורה להיצמדות מקסימלית */
+      letter-spacing: -2px;
+    }
+
+    .main-subtitle {
+      font-size: 2.5rem;
+      color: #555555;
+      margin: 10px 0 30px 0; /* צמצום רווח קטן גם כאן */
+      font-weight: 400;
+    }
+
+    .info-link {
+      color: #658490; 
+      text-decoration: none;
+      font-size: 1.4rem; 
+      font-weight: 600;
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .main-illustration {
+    position: absolute;
+    bottom: 0;
+    left: 0; 
+    height: 82vh; 
+    max-width: 70vw; 
+    object-fit: contain;
+    object-position: bottom left; 
+    z-index: 1;
+    pointer-events: none; 
+  }
+
+  .return-link {
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+    z-index: 10;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #666666;
+    transition: all 0.2s ease-in-out;
+
+    span {
+      font-size: 1.15rem;
+      font-weight: 500;
+    }
+
+    &:hover {
+      color: #000000;
+      span {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  /* --- עיצוב מובייל (נשאר ללא שינוי, מקצה לקצה) --- */
+  @media (max-width: 900px) {
+    .top-logo {
+      top: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 40px;
+    }
+
+    .text-container {
+      top: 90px;
+      right: 0;
+      left: 0;
+      transform: none;
+      width: 100%;
+      padding: 0 15px;
+      text-align: center; 
+
+      .oops-title { font-size: 5.5rem; }
+      .main-subtitle { font-size: 1.5rem; margin: 10px 0 20px 0; }
+      .info-link { font-size: 1.15rem; }
+    }
+
+    .main-illustration {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100vw;
+      max-width: 100vw;
+      height: 45vh;
+      object-fit: cover;
+      object-position: top center;
+    }
+
+    .return-link {
+      bottom: 20px;
+      right: 50%;
+      transform: translateX(50%);
+      background: rgba(255, 255, 255, 0.8);
+      padding: 5px 10px;
+      border-radius: 20px;
+    }
+  }
+}

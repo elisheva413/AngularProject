@@ -1,0 +1,127 @@
+<div class="home-wrapper">
+
+
+    <section class="stack-section hero-section">
+    <img src="images/mainPage.png" alt="Garden of Dreams" class="hero-bg-image">
+    
+    <div class="hero-content">
+      <span class="hero-subtitle">Step into our</span>
+      <h1 class="hero-title">GARDEN OF<br>DREAMS</h1>
+      <button class="btn-shop-now" routerLink="/products">SHOP NOW</button>
+    </div>
+  </section>
+
+  <section class="stack-section promo-section">
+    <div class="promo-layout">
+
+      <div class="promo-visual-side">
+        <a routerLink="/products" class="clickable-image-wrapper">
+          <img src="images/2+1.png" alt="מבצע 2+1" class="promo-img">
+        </a>
+      </div>
+
+      <div class="promo-text-side">
+        <span class="limited-badge">Limited time only</span>
+        <h2>פריט שלישי ב-מ-ת-נ-ה!</h2>
+        <p class="subtitle-text">ההטבה הכי נוצצת של פנדורה כבר כאן:</p>
+        <p class="main-text">
+          זה הזמן להתחדש בצ'ארמס מרגשים, טבעות נוצצות, צמידים אייקוניים,
+          עגילים אלגנטיים ושרשראות מושלמות – ולקבל פריט נוסף במתנה. בחרו
+          את הפיסים שאתם אוהבים, שלבו בין סגנונות וצרו לוק שכבות מדויק..
+          כי כשמדובר בתכשיטים עם משמעות – תמיד יש מקום לעוד אחד.
+        </p>
+        <span class="terms">בכפוף לתקנון, על הזול/ים ביותר, עד ה-4.3.26, לא כולל כפל הטבות</span>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="collections" class="stack-section categories-section">
+    <div class="categories-container">
+      <h2 class="section-title">הקולקציות שלנו:</h2>
+      
+      <div class="categories-grid">
+        
+        <a [routerLink]="['/products']" [queryParams]="{ categoryId: 110 }" class="category-card">
+          <div class="img-wrapper">
+            <img src="images/Charms.webp" alt="צ'ארמס">
+          </div>
+          <h3>צ'ארמס</h3>
+        </a>
+
+        <a [routerLink]="['/products']" [queryParams]="{ categoryId: 105 }" class="category-card">
+          <div class="img-wrapper">
+            <img src="images/Braclets.png" alt="צמידים">
+          </div>
+          <h3>צמידים</h3>
+        </a>
+
+        <a [routerLink]="['/products']" [queryParams]="{ categoryId: 100 }" class="category-card">
+          <div class="img-wrapper">
+            <img src="images/Rings.png" alt="טבעות">
+          </div>
+          <h3>טבעות</h3>
+        </a>
+
+        <a [routerLink]="['/products']" [queryParams]="{ categoryId: 115 }" class="category-card">
+          <div class="img-wrapper">
+            <img src="images/Necklaces.webp" alt="שרשראות">
+          </div>
+          <h3>שרשראות</h3>
+        </a>
+
+        <a [routerLink]="['/products']" [queryParams]="{ categoryId: 120 }" class="category-card">
+          <div class="img-wrapper">
+            <img src="images/Earrings.png" alt="עגילים">
+          </div>
+          <h3>עגילים</h3>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+<section class="stack-section engraving-editorial-final">
+  <div class="editorial-grid">
+    
+    <div class="editorial-column text-col">
+      <div class="content-wrapper">
+        <span class="category-label">תכשיטי חריטה</span>
+        <h2 class="main-title">תכשיטי חריטה עם מסר אישי</h2>
+        <button class="btn-pandora-pink" [routerLink]="['/products']" [queryParams]="{ categoryId: 130 }">
+          SHOP NOW
+        </button>
+      </div>
+    </div>
+
+    <div class="editorial-column image-main-col" [style.transform]="mainImageTransform">
+      <div class="main-img-wrapper">
+        <img src="images/Engeraved2.webp" alt="Pandora Charms Engraving" class="full-height-img">
+      </div>
+    </div>
+
+    <div class="editorial-column image-side-col" [style.transform]="sideImageTransform">
+      <div class="side-img-container">
+        <img src="images/Engraved.png" alt="Pandora Rings Engraving">
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="stack-section giftcard-final-section">
+  <a routerLink="/gift-card" class="giftcard-link">
+    <img src="images/GIFT-CARD.png" alt="Pandora Gift Card" class="giftcard-img">
+  </a>
+</section>
+
+<footer></footer>
+
+ 
+
+
+ 
+
+
+
+</div>

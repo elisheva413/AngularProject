@@ -1,0 +1,105 @@
+<div class="sp-page" dir="rtl">
+  <div class="sp-container" *ngIf="!loading && product">
+    
+    <div class="sp-layout">
+      
+      <div class="sp-gallery-section">
+        <div class="sp-main-display">
+          <img [src]="mainImageSrc" [alt]="product.productsName" class="main-img" />
+        </div>
+
+        <div class="sp-thumbs-row">
+          <div class="thumb-item" [class.active]="selectedImage === 'imgUrl'" (click)="selectImg('imgUrl')">
+            <img [src]="thumb1" alt="זווית 1" />
+          </div>
+          <div class="thumb-item" *ngIf="product.imgUrl2" [class.active]="selectedImage === 'imgUrl2'" (click)="selectImg('imgUrl2')">
+            <img [src]="thumb2" alt="זווית 2" />
+          </div>
+        </div>
+      </div>
+
+      <div class="sp-info-section">
+        <nav class="sp-breadcrumb">
+          <a routerLink="/">דף הבית</a> 
+          <span class="sep">/</span> 
+          
+          <a [routerLink]="['/products']" [queryParams]="{ categoryId: product.categoryId }">
+            {{ breadcrumbLabel }}
+          </a>
+          
+          <span class="sep">/</span> 
+          <span class="breadcrumb-current">{{ product.productsName }}</span>
+        </nav>
+
+        <h1 class="sp-title">{{ product.productsName }}</h1>
+        <div class="sp-id">SKU: {{ product.productsId }}</div>
+        
+        <div class="sp-price">₪ {{ product.price | number:'1.2-2' }}</div>
+
+        <div class="sp-divider"></div>
+
+        <div class="sp-attributes">
+          <div class="attr-item" *ngIf="product.color">
+            <span class="attr-label">צבע:</span>
+            <span class="attr-value">{{ product.color }}</span>
+          </div>
+          <div class="attr-item" *ngIf="product.material">
+            <span class="attr-label">חומר:</span>
+            <span class="attr-value">{{ product.material }}</span>
+          </div>
+        </div>
+
+        <div class="sp-qty-section">
+          <span class="qty-label">כמות:</span>
+          <div class="qty-selector">
+            <button (click)="dec()" class="qty-btn">−</button>
+            <span class="qty-val">{{ qty }}</span>
+            <button (click)="inc()" class="qty-btn">+</button>
+          </div>
+        </div>
+
+        <!-- <div class="sp-actions">
+          <button class="btn-add-to-cart" (click)="addToCart()">
+            <span>הוספה לסל</span>
+            <i class="pi pi-shopping-bag"></i>
+          </button>
+        </div> -->
+        <div class="sp-actions">
+          <button class="btn-add-to-cart" [class.added]="isAdded" (click)="addToCart()" [disabled]="isAdded">
+            
+            <ng-container *ngIf="!isAdded">
+              <span>הוספה לסל</span>
+              <i class="pi pi-shopping-bag"></i>
+            </ng-container>
+
+            <ng-container *ngIf="isAdded">
+              <span>נוסף</span>
+              <i class="pi pi-check"></i>
+            </ng-container>
+
+          </button>
+        </div>
+
+        <div class="sp-description-box">
+          <h3>תיאור המוצר</h3>
+          <p>{{ product.productsDescreption || 'תכשיט יוקרתי מקולקציית פנדורה, עוצב בעבודת יד מחומרים איכותיים.' }}</p>
+        </div>
+
+        <div class="sp-trust-badges">
+          <div class="badge"><i class="pi pi-check-circle"></i> משלוח חינם מעל 299₪</div>
+          <div class="badge"><i class="pi pi-calendar"></i> החלפה עד 30 יום</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="sp-status">
+    <i class="pi pi-spinner pi-spin"></i>
+    <p>טוען את התכשיט שלך...</p>
+  </div>
+  <div *ngIf="errorMsg" class="sp-status error">
+    <i class="pi pi-exclamation-circle"></i>
+    <p>{{ errorMsg }}</p>
+  </div>
+</div>

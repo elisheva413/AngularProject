@@ -1,0 +1,86 @@
+.profile-layout-wrapper {
+  background-color: #fcfcfc;
+  min-height: 100vh;
+  padding: 60px 0;
+  font-family: 'Assistant', sans-serif;
+
+  .luxurious-container {
+    max-width: 950px; // הרוחב המושלם שאהבת כשהיה גריד
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 50px;
+  
+  .main-title {
+    font-size: 2.2rem;
+    color: #27251F;
+    font-weight: 700;
+    margin-bottom: 30px;
+  }
+
+  .profile-tabs-nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    gap: 40px;
+    padding: 0;
+    margin: 0;
+    border-bottom: 1px solid #eaeaea;
+    
+    li a {
+      text-decoration: none;
+      color: #888;
+      font-weight: 600;
+      font-size: 1.1rem;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s;
+      border-bottom: 3px solid transparent;
+
+      i { font-size: 1.3rem; }
+
+      &.active-tab {
+        color: #27251F;
+        border-bottom-color: #ffb6c1; // ורוד פנדורה
+      }
+
+      &:hover:not(.active-tab) {
+        color: #000;
+        border-bottom-color: #f0f0f0;
+      }
+    }
+  }
+}
+
+.profile-content-area {
+  margin-top: 40px;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* כפתור ורוד שהופך לשחור כפי שביקשת */
+::ng-deep .btn-flat-black {
+    background: #ffb6c1 !important; 
+    color: #27251F !important;
+    border-radius: 2px;
+    border: none;
+    padding: 15px 30px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+        background: #000000 !important;
+        color: #ffffff !important;
+    }
+}

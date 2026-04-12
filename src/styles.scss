@@ -1,0 +1,255 @@
+@import "primeicons/primeicons.css";
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&display=swap');
+
+//להגיד לזהבי להוסיף את זה 
+html {
+  scroll-behavior: smooth;
+}
+//
+body {
+    margin: 0;
+    direction: rtl;
+    // font-family: sans-serif;
+    font-family: 'Assistant', sans-serif;
+}
+
+/* צבע ורוד פנדורה - עדכון גלובלי */
+:root {
+    --pandora-pink: #31e868; /* ורוד פנדורה קלאסי */
+    --pandora-pink-dark: #31e868; /* ורוד כהה יותר למצבי מעבר/ריחף */
+}
+
+.p-button.p-button-success {
+    background-color: var(--pandora-pink) !important;
+    border-color: var(--pandora-pink) !important;
+    color: #333 !important;
+}
+
+.p-button.p-button-success:hover {
+    background-color: var(--pandora-pink-dark) !important;
+    border-color: var(--pandora-pink-dark) !important;
+}
+
+.p-tag.p-tag-success {
+    background-color: var(--pandora-pink) !important;
+    color: #333 !important;
+}
+
+.p-checkbox .p-checkbox-box.p-highlight {
+    background-color: var(--pandora-pink) !important;
+    border-color: var(--pandora-pink) !important;
+}
+
+.p-checkbox .p-checkbox-box .p-checkbox-icon {
+    color: #333 !important;
+}
+
+.pandora-footer {
+  margin-top: 50px;
+  border-top: 1px solid #eee;
+  padding: 40px 10%;
+  direction: rtl;
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+  }
+
+  h4 { font-weight: 800; margin-bottom: 15px; }
+  a { display: block; color: #666; text-decoration: none; margin-bottom: 8px; font-size: 14px; }
+}
+
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; 
+}
+
+.content-area {
+  flex: 1; 
+}
+
+.pandora-footer {
+  background-color: #fff;
+  padding: 60px 5% 20px;
+  border-top: 1px solid #eee;
+  width: 100%;
+  box-sizing: border-box; 
+
+  .footer-grid {
+    display: flex; 
+    justify-content: space-between;
+    flex-wrap: wrap; 
+    gap: 30px;
+  }
+
+  .footer-col {
+    min-width: 200px;
+    flex: 1;
+    text-align: right; 
+  }
+}
+
+.p-menubar {
+    display: none !important;
+}
+
+.footer-logo-img {
+  height: 22px;   
+  width: auto;
+  display: block;
+  margin: 10px auto;
+  filter: grayscale(100%); 
+  opacity: 0.7;
+}
+
+@media screen and (max-width: 768px) {
+  .footer-side-icons {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .login-container, .auth-container, .login-page { 
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 40px !important; 
+
+    .login-side, .register-side {
+      width: 100% !important; 
+      padding: 20px !important;
+      border-left: none !important; 
+    }
+  }
+
+  .pandora-footer .footer-grid {
+    display: block !important; 
+    width: 100% !important;
+  }
+
+  .footer-col {
+    display: block !important;
+    width: 100% !important;
+    border-bottom: 1px solid #e5e5e5 !important; 
+    padding: 15px 0 !important;
+    margin: 0 !important;
+
+    h4 {
+      font-size: 14px !important;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between; 
+    }
+
+    h4::after {
+      content: '+';
+      color: #000;
+    }
+
+    ul {
+      display: none !important; 
+    }
+  }
+
+  .footer-bottom {
+    text-align: center !important;
+    display: block !important;
+
+    .footer-logo-img {
+      height: 20px !important;
+      width: auto !important;
+      margin: 20px auto !important;
+    }
+  }
+  
+  .footer-side-icons {
+    display: flex;
+    justify-content: center; 
+    gap: 60px;
+    margin: 40px 0;
+    padding: 30px 0;
+    border-top: 1px solid #f0f0f0;
+    border-bottom: 1px solid #f0f0f0;
+
+    .side-icon-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.2s;
+
+      &:hover { transform: translateY(-5px); }
+
+      i {
+        font-size: 40px; 
+        margin-bottom: 10px;
+        color: #333;
+      }
+
+      span {
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 1px;
+      }
+    }
+  }
+  /* styles.scss - הפתרון הסופי למלחמת השכבות */
+
+/* אנחנו אומרים לכל הקומפוננטה של המסננים שהיא השכבה הכי עליונה באתר */
+app-product-filter {
+    position: relative;
+    z-index: 1000 !important; /* גבוה בהרבה מה-100 של התפריט */
+}
+
+/* מוודאים שה-Overlay (ההחשכה) תופס את כל המסך, כולל ה-MENU */
+.filter-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6) !important; /* החשכה קצת יותר חזקה */
+    z-index: 1001 !important;
+}
+
+/* התפריט עצמו עולה מעל ההחשכה */
+.filter-sidebar {
+    position: fixed;
+    z-index: 1002 !important;
+}
+
+
+/////////////////////////////////////////////////////
+/// /* Custom Toast - Pandora Style */
+.custom-toast-container {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20000;
+  pointer-events: none;
+}
+
+.custom-toast {
+  background: #27251f; /* שחור פנדורה */
+  color: white;
+  padding: 14px 28px;
+  border-radius: 50px; /* עיצוב קפסולה מודרני */
+  font-family: 'Assistant', sans-serif;
+  font-size: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: slideUpFade 0.4s ease-out;
+
+  &.warn { border-left: 4px solid #ffb6c1; } /* ורוד לאזהרה */
+  &.success { border-left: 4px solid #b6ffc1; }
+}
+
+@keyframes slideUpFade {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+}

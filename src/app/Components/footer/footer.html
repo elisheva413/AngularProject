@@ -1,0 +1,95 @@
+<footer class="pandora-footer">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>SHOP</h4>
+      <ul>
+        <li><a [routerLink]="['/products']" [queryParams]="{ categoryId: 110 }">צ'ארמס</a></li>
+        <li><a [routerLink]="['/products']" [queryParams]="{ categoryId: 105 }">צמידים</a></li>
+        <li><a [routerLink]="['/products']" [queryParams]="{ categoryId: 100 }">טבעות</a></li>
+        <li><a [routerLink]="['/products']" [queryParams]="{ categoryId: 115 }">שרשראות</a></li>
+        <li><a [routerLink]="['/products']" [queryParams]="{ categoryId: 120 }">עגילים</a></li>
+        <li><a [routerLink]="['/products']" [queryParams]="{ categoryId: 130 }">תכשיטי חריטה</a></li>
+        <li><a [routerLink]="['/products']" [queryParams]="{ categoryId: 901 }">מתנות</a></li>
+        <li><a href="#">DISNEY X PANDORA</a></li> 
+        <li><a [routerLink]="['/gift-card']">GIFT CARD</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>שירותים</h4>
+      <ul>
+        <li><a routerLink="/stores">סניפי הרשת</a></li>
+        <li>קריירה בפנדורה</li>
+        <li>שאלות ותשובות</li>
+        <li>מדיניות פרטיות</li>
+        <li>שאלות ותשובות - חריטה</li>
+        <li>אחריות תכשיטים</li>
+        <li><a routerLink="/terms">תקנון האתר</a></li>
+        <li>בלוג תכשיטים ואופנה</li>
+        <li>התכשיטים שלנו</li>
+        <li>צרו קשר</li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>מידע שימושי</h4>
+      <ul>
+        <li>תקנון מועדון לקוחות</li>
+        <li>אודות פנדורה</li>
+        <li>מדיניות החזרות/החלפות</li>
+        <li>מדיניות משלוחים</li>
+        <li>ניקוי תכשיטים</li>
+        <li>ביטול עסקה</li>
+        <li>הצהרת נגישות</li>
+        <li><a routerLink="/netfree">תקנון פעילות אינסטגרם</a></li> 
+        <li>תקנון הטבה 1+2</li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>איזור אישי</h4>
+      <ul>
+        <li><a routerLink="/login">כניסה והרשמה</a></li>
+        <li><a [routerLink]="accountLink">החשבון שלי</a></li> 
+        <li>בדיקת יתרת גיפט קארד</li>
+        <li><a [routerLink]="ordersLink">ההזמנות שלי</a></li> 
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>צרו קשר</h4>
+      <ul>
+        <li>כתבו לנו</li>
+        <li><a routerLink="/netfree">Whatsapp</a></li> 
+        <li><a routerLink="/netfree">Facebook</a></li> 
+        <li><a routerLink="/netfree">Instagram</a></li> 
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-icons-row">
+    <div class="icon-item" routerLink="/gift-card" style="cursor: pointer;">
+      <i class="pi pi-id-card"></i>
+      <span>GIFT CARD</span>
+    </div>
+    <div class="icon-item" routerLink="/stores" style="cursor: pointer;">
+      <i class="pi pi-map-marker"></i>
+      <span>הסניפים שלנו</span>
+    </div>
+    <div class="icon-item">
+      <i class="pi pi-briefcase"></i>
+      <span>בואו לעבוד איתנו</span>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="social-links">
+      <i class="pi pi-facebook" routerLink="/netfree" style="cursor: pointer;"></i>
+      <i class="pi pi-youtube" routerLink="/netfree" style="cursor: pointer;"></i>
+      <i class="pi pi-instagram" routerLink="/netfree" style="cursor: pointer;"></i>
+      <i class="pi pi-pinterest" routerLink="/netfree" style="cursor: pointer;"></i>
+    </div>
+    <img src="images/logo.png" alt="Pandora" class="footer-logo-img">
+    <p>Pandora 2026 © | Developed by Elisheva Polsky & Zehavi Kornvasser</p>
+  </div>
+</footer>

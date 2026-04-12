@@ -1,0 +1,118 @@
+<div class="gift-card-page" dir="rtl">
+  
+  <div class="gift-card-content">
+    <nav class="breadcrumbs">
+      <a routerLink="/">דף הבית</a> / <span>Gift Card</span>
+    </nav>
+
+    <div class="hero-banner">
+      <img src="images/GIFT-CARD.png" alt="Pandora Gift Card">
+    </div>
+
+    <section class="step-section">
+      <div class="step-header">
+        <span class="step-number">1</span>
+        <h2>בחירת עיצוב הכרטיס</h2>
+      </div>
+      <div class="designs-grid">
+        <div *ngFor="let card of designs" 
+             class="design-item" 
+             [class.active]="selectedDesign === card.id"
+             (click)="selectDesign(card.id)">
+          <div class="radio-indicator"></div>
+          <img [src]="card.img" [alt]="card.id">
+        </div>
+      </div>
+    </section>
+
+    <section class="step-section">
+      <div class="step-header">
+        <span class="step-number">2</span>
+        <h2>בחירת סכום</h2>
+      </div>
+      <div class="amounts-flex">
+        <div *ngFor="let am of amounts" 
+             class="amount-box" 
+             [class.active]="selectedAmount === am"
+             (click)="selectAmount(am)">
+          <div class="radio-indicator-small"></div>
+          <span>₪{{am}}</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="step-section">
+      <div class="step-header">
+        <span class="step-number">3</span>
+        <h2>למי מיועדת המתנה?</h2>
+      </div>
+      <div class="form-layout">
+        <div class="input-field">
+          <label>שם המקבל</label>
+          <input type="text" [(ngModel)]="formData.recipientName" placeholder="שם המקבל">
+        </div>
+        <div class="input-field">
+          <label>טלפון</label>
+          <input type="text" [(ngModel)]="formData.recipientPhone" placeholder="טלפון">
+        </div>
+        <div class="input-field full-row">
+          <label>דוא"ל - לא חובה</label>
+          <input type="email" [(ngModel)]="formData.recipientEmail" placeholder="דוא&quot;ל - לא חובה">
+        </div>
+        <div class="input-field">
+          <label>מתי לשלוח את המתנה?</label>
+          <input type="date" [(ngModel)]="formData.date">
+        </div>
+        <div class="input-field">
+          <label>באיזו שעה?</label>
+          <input type="time" [(ngModel)]="formData.time">
+        </div>
+      </div>
+      
+      <div class="message-wrapper">
+        <label>מה האירוע? נעזור לכתוב ברכה</label>
+        <select class="custom-select">
+          <option>בחרו ברכה כתובה מראש</option>
+          <option>יום הולדת</option>
+          <option>יום נישואין</option>
+        </select>
+        <textarea placeholder="כתבו ברכה משלכם" [(ngModel)]="formData.greeting"></textarea>
+        
+        <div class="checkbox-options">
+          <p>שליחת המתנה באמצעות:</p>
+          <label><input type="checkbox" [(ngModel)]="formData.sendSms"> SMS</label>
+          <label><input type="checkbox" [(ngModel)]="formData.sendEmail"> אימייל</label>
+        </div>
+      </div>
+    </section>
+
+    <section class="step-section">
+      <div class="step-header">
+        <span class="step-number">4</span>
+        <h2>פרטי השולח</h2>
+      </div>
+      <div class="form-layout">
+        <div class="input-field">
+          <label>שם השולח</label>
+          <input type="text" [(ngModel)]="formData.senderName" placeholder="שם השולח">
+        </div>
+        <div class="input-field">
+          <label>טלפון</label>
+          <input type="text" [(ngModel)]="formData.senderPhone" placeholder="טלפון">
+        </div>
+        <div class="input-field full-row">
+          <label>דוא"ל</label>
+          <input type="email" [(ngModel)]="formData.senderEmail" placeholder="דוא&quot;ל">
+        </div>
+      </div>
+      
+      <div class="checkout-footer">
+        <label class="terms">
+          <input type="checkbox" [(ngModel)]="formData.terms"> 
+          אני מאשר/ת את <a href="#">תקנון האתר</a>
+        </label>
+        <button class="btn-pay" (click)="onSubmit()">לתשלום</button>
+      </div>
+    </section>
+  </div>
+</div>

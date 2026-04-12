@@ -1,0 +1,113 @@
+// עיצוב כרטיס הפרטים האישיים - סטייל פנדורה שטוח ויוקרתי
+.profile-card {
+  background: #ffffff;
+  padding: 45px;
+  border-radius: 4px; // פינות מעט מעוגלות למראה רך
+  border: 1px solid #f0f0f0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03); // צללית עדינה מאוד
+  margin: 0 auto;
+  max-width: 650px; // מגביל את רוחב הטופס למראה פרופורציונלי
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #f8f8f8;
+    padding-bottom: 15px;
+    
+    i { 
+      font-size: 1.5rem; 
+      color: #ffb6c1; // ורוד פנדורה
+    }
+    
+    h2 { 
+      margin: 0; 
+      font-size: 1.5rem; 
+      color: #27251F; 
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+  }
+
+  .form-grid-flat {
+    display: grid;
+    grid-template-columns: 1fr 1fr; // חלוקה ל-2 עמודות למראה מאוזן
+    gap: 30px;
+
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr; // במובייל הכל בשורה אחת
+    }
+
+    .input-field-flat {
+      display: flex;
+      flex-direction: column;
+
+      label { 
+        font-size: 13px; 
+        color: #888; 
+        margin-bottom: 8px;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      input {
+        border: none;
+        border-bottom: 1.5px solid #27251F; // קו תחתון בולט ויוקרתי
+        background: #fdfdfd;
+        padding: 12px 10px;
+        font-size: 16px;
+        outline: none;
+        font-family: inherit;
+        color: #27251F;
+        transition: all 0.3s ease;
+
+        &:focus { 
+          border-bottom-color: #ffb6c1; // מעבר לורוד במיקוד
+          background: #fff;
+        }
+
+        &::placeholder {
+          color: #d0d0d0;
+          font-size: 14px;
+        }
+      }
+    }
+
+    // הופך את שדה הכתובת לרחב (תופס 2 עמודות)
+    .input-field-flat:last-child {
+      grid-column: span 2;
+      @media (max-width: 600px) {
+        grid-column: span 1;
+      }
+    }
+  }
+
+  /* הכפתור הורוד שהופך לשחור - בול מה שביקשת */
+  .btn-flat-black {
+    width: 100%;
+    margin-top: 50px;
+    padding: 18px;
+    background: #ffb6c1; // התחלה בורוד
+    color: #27251F;
+    border: none;
+    border-radius: 2px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+    &:hover { 
+      background: #000000; // הופך לשחור
+      color: #ffffff; // טקסט הופך ללבן
+      transform: translateY(-2px); // הרמה קלה
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}

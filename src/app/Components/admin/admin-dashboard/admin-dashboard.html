@@ -1,0 +1,16 @@
+<div class="admin-dashboard">
+  <div class="dashboard-header">
+    <h1>פאנל ניהול</h1>
+    <p>ברוכים הבאים למערכת הניהול</p>
+  </div>
+
+  <div class="dashboard-cards">
+    <div *ngFor="let card of adminCards" class="admin-card" [routerLink]="card.route">
+      <div class="card-icon" [style.background]="card.color">
+        <i [class]="card.icon"></i>
+      </div>
+      <h3>{{ card.title }}</h3>
+      <p-button label="כניסה" icon="pi pi-arrow-left" [style]="{'width': '100%'}"></p-button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<section class="profile-card info-section">
+  <div class="card-header">
+    <i class="pi pi-user-edit"></i> <h2>הפרטים שלי</h2>
+  </div>
+  <div class="form-grid-flat">
+    <div class="input-field-flat">
+      <label>שם פרטי</label>
+      <input type="text" [(ngModel)]="userData.firstName">
+    </div>
+    <div class="input-field-flat">
+      <label>שם משפחה</label>
+      <input type="text" [(ngModel)]="userData.lastName">
+    </div>
+    <div class="input-field-flat">
+      <label>טלפון</label>
+      <input type="text" [(ngModel)]="userData.phone">
+    </div>
+    <div class="input-field-flat">
+      <label>כתובת מלאה</label>
+      <input type="text" [(ngModel)]="userData.address" placeholder="עיר, רחוב, מספר בית">
+    </div>
+  </div>
+  <button class="btn-flat-black" (click)="onSave()">שמירת שינויים</button>
+</section>

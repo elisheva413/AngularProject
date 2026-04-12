@@ -1,0 +1,207 @@
+/* product-filter.scss */
+
+/* 1. המעטפת החיצונית של התפריט - חייבת להיות מעל ה-MENU (9999) */
+:host {
+    display: block;
+}
+
+/* התפריט הצידי עצמו */
+.filter-sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 380px; 
+    height: 100vh;
+    background: white;
+    z-index: 10001 !important; /* אחד מעל ה-Overlay */
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease-in-out;
+    
+    @media (max-width: 480px) {
+        width: 100%; /* במובייל תופס הכל */
+    }
+}
+
+/* המסך המוחשך מאחורי התפריט - מכסה גם את ה-MENU */
+.filter-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 10000 !important; /* מעל ה-MENU שהוא 9999 */
+}
+
+/* כותרת התפריט (כדי שלא תתכסה) */
+.filter-header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #f0f0f0;
+    
+    h2 {
+        margin: 0;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #27251F;
+    }
+    
+    .btn-close {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #999;
+        &:hover { color: #000; }
+    }
+}
+
+/* 2. הקוד המקורי שלך - מסודר ומחובר למעטפת */
+.filter-inner-content {
+    flex: 1;
+    overflow-y: auto; /* מאפשר גלילה בתוך המסננים אם הרשימה ארוכה */
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+
+    hr { 
+        border: none; 
+        border-bottom: 1px solid #f5f5f5; 
+        margin: 0; 
+    }
+
+    details {
+        summary {
+            list-style: none;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 25px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 16px;
+            color: #27251F;
+            
+            &::-webkit-details-marker { display: none; }
+            &::after { content: '+'; font-size: 1.2rem; font-weight: 300; }
+        }
+
+        &[open] summary::after { content: '−'; }
+    }
+}
+
+/* עיצוב המתכות והצבעים שלך (ללא שינוי לוגי) */
+.color-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 10px 0 25px 0;
+}
+
+.color-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+
+    &:hover { background-color: #f9f9f9; }
+    
+    &.active { 
+        background-color: #f5f5f5;
+        .color-name { font-weight: 700; }
+        .color-circle { box-shadow: 0 0 0 2px white, 0 0 0 3px #ffb6c1; }
+    }
+
+    .color-name { flex-grow: 1; font-size: 15px; color: #444; }
+    
+    .color-circle { 
+        width: 28px; 
+        height: 28px; 
+        border-radius: 50%; 
+        border: 1px solid #eaeaea; 
+        box-shadow: inset 0 2px 4px rgba(0,0,0,0.06); 
+        
+        /* הגרדיאנטים המטאליים המעולים שלך */
+        &.silver { background: linear-gradient(135deg, #ffffff 0%, #e8e9ed 40%, #c4c5c9 100%); }
+        &.gold { background: linear-gradient(135deg, #fff7d1 0%, #f2e6b3 40%, #cbb57b 100%); }
+        &.rose-gold { background: linear-gradient(135deg, #fff2eb 0%, #f0c4b2 40%, #c99683 100%); }
+        &.mat-ruthenium { background: linear-gradient(135deg, #b8b8b8 0%, #7a7a7a 40%, #4a4a4a 100%); }
+        &.mat-silver-gold-18k { background: linear-gradient(135deg, #fff7d1 0%, #f2e6b3 40%, #cbb57b 100%); }
+        &.mat-silver { background: linear-gradient(135deg, #ffffff 0%, #e8e9ed 40%, #c4c5c9 100%); }
+        &.mat-silver-gold { background: linear-gradient(135deg, #e8e9ed 0%, #c4c5c9 49%, #f2e6b3 51%, #cbb57b 100%); }
+        &.mat-silver-rose { background: linear-gradient(135deg, #e8e9ed 0%, #c4c5c9 49%, #f0c4b2 51%, #c99683 100%); }
+        &.mat-gold { background: linear-gradient(135deg, #fff7d1 0%, #f2e6b3 40%, #cbb57b 100%); }
+        &.mat-rose { background: linear-gradient(135deg, #fff2eb 0%, #f0c4b2 40%, #c99683 100%); }
+
+        &.color-red { background-color: #c7362a; }
+        &.color-pink { background-color: #d25f9c; }
+        &.color-turquoise { background-color: #5bb3b1; }
+        &.color-blue { background-color: #3f63d9; }
+        &.color-purple { background-color: #7b4ee0; }
+        &.color-black { background-color: #111111; }
+        &.color-white { background-color: #ffffff; border: 1px solid #e0e0e0; }
+    }
+}
+
+/* סליידר מחיר */
+.price-range-wrapper {
+    padding: 10px 0 45px 0;
+    .price-labels { 
+        display: flex; 
+        justify-content: space-between; 
+        margin-bottom: 25px; 
+        font-size: 14px; 
+        font-weight: 600;
+    }
+    .dual-slider-container {
+        position: relative; height: 4px;
+        .slider-track-bg { position: absolute; width: 100%; height: 3px; background: #e4e4e4; top: 50%; transform: translateY(-50%); }
+        .slider-track-fill { position: absolute; height: 3px; background: #222; top: 50%; transform: translateY(-50%); }
+        .range-input {
+            position: absolute; width: 100%; top: 50%; transform: translateY(-50%);
+            -webkit-appearance: none; background: none; pointer-events: none; margin: 0;
+            &::-webkit-slider-thumb {
+                -webkit-appearance: none; pointer-events: all; width: 18px; height: 18px;
+                border-radius: 50%; background: #fff; border: 2px solid #222; cursor: pointer;
+            }
+        }
+    }
+}
+
+/* 3. כפתורי הפעולה בתחתית - וורוד פנדורה */
+.filter-actions {
+    padding: 20px;
+    border-top: 1px solid #f0f0f0;
+    background: white;
+
+    .btn-clear-all {
+        width: 100%;
+        padding: 16px;
+        background-color: #ffb6c1; /* וורוד פנדורה */
+        color: #000;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        
+        &:hover { 
+            background-color: #333; 
+            color: #fff; 
+        }
+        
+        i { font-size: 18px; }
+    }
+}

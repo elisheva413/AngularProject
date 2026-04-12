@@ -1,0 +1,30 @@
+<div class="profile-layout-wrapper" dir="rtl">
+  <div class="luxurious-container">
+    
+    <header class="profile-header">
+      <h1 class="main-title">החשבון שלי</h1>
+      
+      <nav class="profile-tabs-nav">
+        <ul>
+          <li>
+            <a routerLink="edit" routerLinkActive="active-tab">
+              <i class="pi pi-user-edit"></i> הפרטים שלי
+            </a>
+          </li>
+          
+          <li *ngIf="!isAdmin">
+            <a routerLink="orders" routerLinkActive="active-tab">
+              <i class="pi pi-shopping-bag"></i> ההזמנות שלי
+            </a>
+          </li>
+          
+        </ul>
+      </nav>
+    </header>
+    
+    <div class="profile-content-area">
+      <router-outlet></router-outlet>
+    </div>
+
+  </div>
+</div>

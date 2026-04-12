@@ -1,0 +1,149 @@
+<!-- מקווה שסופי  -->
+ <div class="checkout-page" dir="rtl">
+  <div class="checkout-container">
+    <h1 class="main-title">סיכום ותשלום</h1>
+
+    <section class="checkout-section">
+      <div class="section-header" (click)="isSummaryOpen = !isSummaryOpen" style="cursor: pointer;">
+        <div class="step-header-left">
+          <span class="step-number">1</span>
+          <h2>ההזמנה שלך</h2>
+        </div>
+        <i class="pi" [ngClass]="isSummaryOpen ? 'pi-minus' : 'pi-plus'"></i>
+      </div>
+      
+      <div class="order-summary-wide" *ngIf="isSummaryOpen">
+        <div class="summary-table-header">
+          <span class="col-item">פריט</span>
+          <span class="col-qty">כמות</span>
+          <span class="col-price">מחיר</span>
+        </div>
+
+        <div class="items-list">
+          <div *ngFor="let item of cartItems" class="item-row">
+            <div class="col-item item-info">
+              <img [src]="getProductImagePath(item)" class="item-img">
+              <div class="item-details">
+                <span class="name">{{ item.product.productsName }}</span>
+                <span class="sku">במלאי</span>
+              </div>
+            </div>
+            <div class="col-qty">{{ item.selectedQuantity }}</div>
+            <div class="col-price">₪{{ (item.product.price * item.selectedQuantity) | number:'1.2-2' }}</div>
+          </div>
+        </div>
+
+        <div class="summary-totals">
+          <div class="total-row">
+            <span>סכום ההזמנה</span>
+            <span class="price-value">₪{{ getTotalPrice() | number:'1.2-2' }}</span>
+          </div>
+          
+          <div class="total-row">
+            <span>דמי משלוח</span>
+            <span class="price-value" [class.free]="getShippingCost() === 0">
+              {{ getShippingCost() === 0 ? 'חינם' : (getShippingCost() | number:'1.2-2') + ' ₪' }}
+            </span>
+          </div>
+
+          <div class="total-row grand-total">
+            <span>סך הכל לתשלום</span>
+            <span class="price-value">₪{{ getFinalTotal() | number:'1.2-2' }}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="checkout-section">
+      <div class="section-header">
+        <div class="step-header-left">
+          <span class="step-number">2</span>
+          <h2>בחרי אמצעי תשלום</h2>
+        </div>
+      </div>
+
+      <div class="payment-accordion">
+        
+        <div class="payment-method-box" [class.active]="selectedPayment === 'credit'">
+          <div class="method-header" (click)="togglePayment('credit')">
+            <div class="header-right">
+              <div class="radio-indicator"></div>
+              <i class="pi pi-credit-card"></i>
+              <span class="method-name">כרטיס אשראי / דיירקט</span>
+            </div>
+          </div>
+          <div class="method-content" *ngIf="selectedPayment === 'credit'">
+            <div class="credit-card-form">
+              <div class="form-grid">
+                <div class="input-field full">
+                  <label>מספר כרטיס *</label>
+                  <input type="text" placeholder="#### #### #### ####">
+                </div>
+                <div class="input-field">
+                  <label>שם בעל הכרטיס *</label>
+                  <input type="text">
+                </div>
+                <div class="input-field">
+                  <label>תאריך תפוגה (MM/YY) *</label>
+                  <div class="date-row">
+                    <input type="text" placeholder="MM">
+                    <span>/</span>
+                    <input type="text" placeholder="YY">
+                  </div>
+                </div>
+                <div class="input-field cvv-field">
+                  <label>CVV *</label>
+                  <input type="password" placeholder="3 ספרות">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="payment-method-box" [class.active]="selectedPayment === 'paypal'">
+          <div class="method-header" (click)="togglePayment('paypal')">
+            <div class="header-right">
+              <div class="radio-indicator"></div>
+              <i class="pi pi-paypal"></i>
+              <span class="method-name">PayPal™</span>
+            </div>
+          </div>
+          <div class="method-content centered" *ngIf="selectedPayment === 'paypal'">
+            <p>לחצי על הכפתור למטה כדי להיכנס לפייפאל ולאשר את התשלום.</p>
+            
+            <button class="paypal-payment-btn" (click)="placeOrder()">
+              שלם באמצעות <span>PayPal</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="payment-method-box" [class.active]="selectedPayment === 'google'">
+          <div class="method-header" (click)="togglePayment('google')">
+            <div class="header-right">
+              <div class="radio-indicator"></div>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg" class="gpay-logo">
+              <span class="method-name">Google Pay</span>
+            </div>
+          </div>
+          <div class="method-content centered" *ngIf="selectedPayment === 'google'">
+            <p>לחצי על הכפתור למטה כדי לאשר את התשלום באמצעות Google Pay.</p>
+            
+            <button class="gpay-payment-btn" (click)="placeOrder()">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg" alt="Google Pay">
+              <span class="plus">+</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="final-action">
+      <p class="terms-text">בלחיצה על "שלם כעת" אני מאשרת את <a href="#">תקנון האתר</a></p>
+      <button class="btn-submit-order" (click)="placeOrder()" [disabled]="isSubmitting">
+        {{ isSubmitting ? 'מעבד תשלום...' : 'שלם כעת' }}
+      </button>
+    </div>
+
+  </div>
+</div>

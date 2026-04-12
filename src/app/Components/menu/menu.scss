@@ -1,0 +1,297 @@
+/* ========================================= */
+/* --- הגדרות בסיס --- */
+/* ========================================= */
+:host {
+  display: block;
+  width: 100%;
+}
+
+.header-spacer {
+  height: 146px; 
+  width: 100%;
+  display: block;
+  
+  @media (max-width: 768px) {
+    height: 125px;
+  }
+
+  &.hidden {
+    display: none !important;
+  }
+}
+
+.pandora-header {
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 900;
+  background: #fff;
+  direction: rtl;
+  font-family: 'Assistant', sans-serif;
+  
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
+              background-color 0.4s ease, 
+              box-shadow 0.4s ease;
+
+  &.header-hidden {
+    transform: translateY(-100%);
+  }
+
+  &.header-scrolled {
+    background: rgba(255, 255, 255, 0.98); 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  }
+
+  &.header-transparent {
+    background-color: transparent !important;
+    box-shadow: none !important;
+
+    .promo-bar, .categories-nav {
+      background-color: transparent !important;
+      border-bottom-color: rgba(255, 255, 255, 0.2) !important;
+    }
+    
+    .middle-header {
+      border-bottom-color: rgba(255, 255, 255, 0.2) !important;
+    }
+
+    // .promo-bar, .categories-nav ul li a, .header-right .custom-icon-link, .header-right .count {
+    //   color: #ffffff !important;
+    // }
+    .promo-bar, .categories-nav ul li a, .header-right i, .header-right .count {
+      color: #ffffff !important;
+    }
+    
+    .categories-nav ul li a:hover {
+      border-bottom-color: #ffffff !important;
+    }
+
+    .search-container {
+      border-bottom-color: rgba(255, 255, 255, 0.6) !important;
+
+      i { color: #ffffff !important; }
+
+      input {
+        background-color: transparent !important;
+        color: #ffffff !important;
+
+        &::placeholder {
+          color: rgba(255, 255, 255, 0.7) !important;
+        }
+      }
+    }
+  }
+}
+
+/* ========================================= */
+/* --- חלק עליון ואמצעי --- */
+/* ========================================= */
+.promo-bar {
+  background-color: #fdf2f4; 
+  text-align: center;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.middle-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 5%;
+  border-bottom: 1px solid #f0f0f0;
+
+  /* אזור החיפוש (ימין) */
+  .header-left {
+    flex: 1; /* נותן שליש מהרוחב */
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .search-container {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #000;
+    padding: 5px;
+    width: 250px;
+    
+    input {
+      border: none;
+      outline: none;
+      padding: 5px 10px;
+      width: 100%;
+      font-size: 14px;
+      background: transparent;
+    }
+  }
+
+
+
+  /* אזור הלוגו (אמצע) - עכשיו נעול בול באמצע! */
+  .header-center {
+    flex: 1; /* נותן שליש מהרוחב */
+    display: flex;
+    justify-content: center; /* ממרכז את הלוגו בתוך השליש שלו */
+    
+    .main-logo {
+      height: 35px;
+      cursor: pointer;
+    }
+  }
+  /////////////////////
+  /// //  .header-right {
+//     display: flex;
+//     gap: 16px; /* צמצמנו את הרווח כדי שיהיו קרובים ואחידים */
+//     font-size: 22px; /* הגדלנו טיפה את האייקונים כדי שייראו טוב יותר */
+//     align-items: center;
+    
+//     /* מונע מהתפריט הנסתר של פריים ליצור 'רווח רפאים' בתוך הפלקס */
+//     p-menu {
+//       position: absolute;
+//       visibility: hidden;
+//     }
+
+//     .cart-icon {
+//       position: relative;
+//       display: flex;
+//       align-items: center;
+      
+//       .count {
+//         position: absolute;
+//         top: -6px;
+//         right: -8px;
+//         background: #000;
+//         color: #fff;
+//         font-size: 11px;
+//         font-weight: bold;
+//         border-radius: 50%;
+//         width: 17px;
+//         height: 17px;
+//         display: flex;
+//         align-items: center;
+//         justify-content: center;
+//       }
+//     }
+
+//     i {
+//       cursor: pointer;
+//       transition: opacity 0.2s ease;
+//       &:hover { opacity: 0.6; }
+//     }
+//   }
+// }
+  /// /////////////////////
+  /* אזור האייקונים (שמאל) */
+  .header-right {
+    flex: 1; /* נותן שליש מהרוחב */
+    display: flex;
+    justify-content: flex-end; /* מצמיד את האייקונים לקצה השמאלי */
+    gap: 20px; 
+    align-items: center;
+    font-size: 22px; 
+    
+    p-menu {
+      position: absolute;
+    }
+
+    .custom-icon-link {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      color: inherit; 
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      text-decoration: none;
+
+      &:hover { 
+        opacity: 0.6; 
+      }
+    }
+
+
+    .cart-icon {
+      position: relative;
+      
+      .count {
+        position: absolute;
+        top: -6px;
+        right: -8px;
+        background: #000;
+        color: #fff;
+        font-size: 11px;
+        font-weight: bold;
+        border-radius: 50%;
+        width: 17px;
+        height: 17px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+     i {
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+      &:hover { opacity: 0.6; }
+    }
+  }
+}
+
+/* ========================================= */
+/* --- תפריט קטגוריות תחתון --- */
+/* ========================================= */
+.categories-nav {
+  padding: 15px 0; 
+  border-bottom: 1px solid #f0f0f0;
+  background-color: #fff;
+
+  ul {
+    display: flex;
+    justify-content: center; 
+    list-style: none;
+    gap: 45px; 
+    margin: 0;
+    padding: 0;
+
+    li a {
+      text-decoration: none;
+      color: #000;
+      font-weight: 500; 
+      font-size: 14px; 
+      letter-spacing: 0.5px; 
+      transition: all 0.3s ease;
+      display: inline-block;
+      padding-bottom: 5px; 
+      
+      &:hover {
+        color: #666; 
+        border-bottom: 1px solid #000; 
+      }
+    }
+  
+    li:first-child a {
+      font-weight: 700;
+    }
+  }
+}
+
+/* ========================================= */
+/* --- התאמה למובייל --- */
+/* ========================================= */
+@media (max-width: 768px) {
+  .middle-header {
+    padding: 10px 15px; 
+    
+    .main-logo {
+      height: 25px !important; 
+    }
+
+    /* מסתירים את תיבת החיפוש במובייל, אבל משאירים את הדיב הריק כדי שהלוגו יישאר ממורכז */
+    .search-container {
+      display: none;    
+    }
+  }
+
+  .categories-nav {
+    display: none; 
+  }
+}

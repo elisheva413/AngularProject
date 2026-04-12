@@ -1,0 +1,197 @@
+.gift-card-page {
+  direction: rtl;
+  background-color: #fff;
+  padding-bottom: 100px;
+  font-family: 'Assistant', sans-serif;
+
+  .gift-card-content {
+    max-width: 1300px; // יותר ארוך משני הצדדים כפי שביקשת
+    width: 94%;
+    margin: 0 auto;
+  }
+
+  .breadcrumbs {
+    padding: 25px 0;
+    font-size: 13px;
+    color: #888;
+    a { color: #000; text-decoration: none; &:hover { text-decoration: underline; } }
+  }
+
+  .hero-banner {
+    margin-bottom: 30px;
+    img { width: 100%; display: block; border-radius: 2px; }
+  }
+
+  .step-section {
+    background-color: #f6f6f6;
+    padding: 45px;
+    margin-bottom: 30px;
+    border-radius: 2px;
+    text-align: right;
+
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 35px;
+      
+      h2 { font-size: 20px; font-weight: 700; margin: 0; color: #27251F; }
+      
+      .step-number {
+        background-color: #ffb6c1;
+        color: #27251F;
+        width: 28px;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        border-radius: 2px;
+      }
+    }
+  }
+
+  // גריד כרטיסים
+  .designs-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+
+    .design-item {
+      position: relative;
+      cursor: pointer;
+      img { width: 100%; border-radius: 8px; transition: 0.3s; }
+      
+      .radio-indicator {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        width: 20px;
+        height: 20px;
+        border: 2px solid #fff;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.4);
+      }
+
+      &.active {
+        img { outline: 2px solid #27251F; }
+        .radio-indicator { background: #27251F; border-color: #fff; }
+      }
+    }
+  }
+
+  // סכומים - יישור לימין ללא כפתור "אחר"
+  .amounts-flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 15px;
+
+    .amount-box {
+      background: #fff;
+      padding: 16px 35px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      min-width: 120px;
+      justify-content: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+
+      .radio-indicator-small {
+        width: 16px;
+        height: 16px;
+        border: 1px solid #ccc;
+        border-radius: 50%;
+      }
+
+      &.active {
+        outline: 1px solid #27251F;
+        .radio-indicator-small { background: #27251F; border-color: #27251F; }
+      }
+    }
+  }
+
+  // טפסים
+  .form-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 35px;
+
+    .input-field {
+      display: flex;
+      flex-direction: column;
+      label { font-size: 14px; color: #888; margin-bottom: 5px; }
+      input {
+        border: none;
+        border-bottom: 1px solid #27251F;
+        background: transparent;
+        padding: 12px 0;
+        font-size: 17px;
+        outline: none;
+        text-align: right;
+        font-family: inherit;
+      }
+      &.full-row { grid-column: span 2; }
+    }
+  }
+
+  .message-wrapper {
+    margin-top: 45px;
+    .custom-select, textarea {
+      width: 100%;
+      border: 1px solid #27251F;
+      border-radius: 4px;
+      padding: 15px;
+      margin-top: 15px;
+      font-family: inherit;
+    }
+    textarea { height: 130px; resize: none; }
+    
+    .checkbox-options {
+      margin-top: 25px;
+      p { font-weight: 700; margin-bottom: 15px; }
+      label { margin-left: 30px; cursor: pointer; input { margin-left: 10px; } }
+    }
+  }
+
+  .checkout-footer {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 35px;
+
+    .terms {
+      font-size: 15px;
+      input { margin-left: 10px; }
+      a { color: #000; font-weight: 700; text-decoration: underline; }
+    }
+
+    // הכפתור - 5px רדיוס ומעבר צבע חלק
+    .btn-pay {
+      background-color: #000;
+      color: #fff;
+      border: none;
+      padding: 20px 120px;
+      font-size: 19px;
+      font-weight: 700;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+      &:hover {
+        background-color: #ffb6c1;
+        color: #27251F;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      }
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .designs-grid { grid-template-columns: repeat(2, 1fr); }
+  .form-layout { grid-template-columns: 1fr; .input-field.full-row { grid-column: span 1; } }
+}

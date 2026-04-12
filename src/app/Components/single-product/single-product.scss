@@ -1,0 +1,215 @@
+.sp-page {
+  padding: 60px 8px;
+  background-color: #ffffff;
+  min-height: 100vh;
+  direction: rtl;
+  font-family: 'Assistant', sans-serif;
+}
+
+.sp-container {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.sp-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr; /* התמונה מקבלת יותר שטח מהטקסט */
+  gap: 80px;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+/* --- גלריית תמונות --- */
+.sp-gallery-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sp-main-display {
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 1 / 1;
+
+  .main-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.5s ease;
+    &:hover { transform: scale(1.05); }
+  }
+}
+
+.sp-thumbs-row {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+
+  .thumb-item {
+    width: 80px;
+    height: 80px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.2s;
+
+    img { width: 100%; height: 100%; object-fit: contain; }
+    &:hover { border-color: #ccc; }
+    &.active { border: 2px solid #27251F; }
+  }
+}
+
+/* --- צד המידע --- */
+.sp-info-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* יישור לימין ב-RTL */
+  text-align: right;
+}
+
+.sp-breadcrumb {
+  font-size: 13px;
+  color: #767676;
+  margin-bottom: 20px;
+  .sep { margin: 0 8px; }
+  a { color: #27251F; text-decoration: none; &:hover { text-decoration: underline; } }
+}
+
+.sp-title {
+  font-size: 32px;
+  font-weight: 600;
+  color: #27251F;
+  margin: 0 0 8px 0;
+}
+
+.sp-id { font-size: 13px; color: #aaa; margin-bottom: 25px; }
+
+.sp-price {
+  font-size: 26px;
+  font-weight: 500;
+  color: #27251F;
+  margin-bottom: 30px;
+}
+
+.sp-divider {
+  width: 100%;
+  height: 1px;
+  background-color: #f0f0f0;
+  margin-bottom: 30px;
+}
+
+.sp-attributes {
+  margin-bottom: 30px;
+  .attr-item {
+    margin-bottom: 10px;
+    font-size: 16px;
+    .attr-label { font-weight: bold; color: #27251F; margin-left: 8px; }
+    .attr-value { color: #555; }
+  }
+}
+
+.sp-qty-section {
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  .qty-label { font-size: 15px; font-weight: 600; }
+  
+  .qty-selector {
+    display: flex;
+    align-items: center;
+    border: 1px solid #27251F;
+    border-radius: 4px;
+    
+    .qty-btn {
+      background: none; border: none; padding: 10px 18px; cursor: pointer; font-size: 20px;
+      &:hover { background-color: #f5f5f5; }
+    }
+    .qty-val { width: 50px; text-align: center; font-weight: 600; font-size: 16px; }
+  }
+}
+
+.sp-actions {
+  width: 100%;
+  margin-bottom: 50px;
+
+
+  .btn-add-to-cart {
+    width: 100%;
+    background-color: #ffb6c1; /* הוורוד שלנו */
+    color: #000;
+    border: none;
+    padding: 18px;
+    font-size: 17px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    transition: all 0.15s ease;
+    &:hover:not(.added) {
+      background-color: #333;
+      color: #fff;
+    }
+
+    /* === מצב לאחר לחיצה === */
+    &.added {
+      background-color: #27251F; /* שחור-פנדורה כמו בתמונה ששלחת */
+      color: #fff;
+      cursor: default; /* משנה את העכבר כדי שיבינו שזה במצב המתנה */
+      
+      i {
+        font-size: 20px;
+        animation: popIn 0.15s ease-out forwards;
+      }
+    }
+  }
+
+/* האנימציה הקטנה שגורמת ל-V לקפוץ פנימה בסטייל */
+@keyframes popIn {
+  0% { transform: scale(0); opacity: 0; }
+  80% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+}
+
+.sp-description-box {
+  width: 100%;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 30px;
+  
+  h3 { font-size: 16px; font-weight: bold; margin-bottom: 15px; color: #27251F; }
+  p { font-size: 15px; line-height: 1.8; color: #555; }
+}
+
+.sp-trust-badges {
+  margin-top: 40px;
+  display: flex;
+  gap: 25px;
+  .badge {
+    font-size: 13px;
+    color: #767676;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    i { color: #27251F; }
+  }
+}
+
+.sp-status {
+  text-align: center;
+  padding: 150px 0;
+  i { font-size: 40px; margin-bottom: 20px; }
+  &.error { color: #c7362a; }
+}

@@ -1,0 +1,74 @@
+<div class="auth-container register-page">
+  <div class="auth-section registration-box">
+    <h1>מצטרפים לקהילה שלנו</h1>
+    <p>הירשמו ותתחילו ליהנות מהטבות בלעדיות</p>
+
+    <form class="form-container" (ngSubmit)="onRegister()">
+      
+      <div class="field">
+        <p-floatLabel>
+          <input pInputText id="firstName" name="firstName" autocomplete="given-name" [(ngModel)]="registerData.FirstName" class="w-full underline-input" />
+          <label for="firstName">שם פרטי</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="field">
+        <p-floatLabel>
+          <input pInputText id="lastName" name="lastName" autocomplete="family-name" [(ngModel)]="registerData.LastName" class="w-full underline-input" />
+          <label for="lastName">שם משפחה</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="field">
+        <p-floatLabel>
+          <input pInputText id="phone" type="tel" name="phone" autocomplete="tel" [(ngModel)]="registerData.Phone" class="w-full underline-input" />
+          <label for="phone">מספר טלפון</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="field">
+        <p-floatLabel>
+          <input pInputText id="address" name="address" autocomplete="street-address" [(ngModel)]="registerData.Address" class="w-full underline-input" />
+          <label for="address">כתובת מגורים</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="field">
+        <p-floatLabel>
+          <input pInputText id="email" type="email" name="email" autocomplete="username email" [(ngModel)]="registerData.Email" class="w-full underline-input" />
+          <label for="email">כתובת אימייל</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="field">
+        <p-floatLabel>
+          <p-password id="password" name="password" autocomplete="new-password" [(ngModel)]="registerData.Password" [toggleMask]="true" [feedback]="true" 
+            styleClass="w-full" inputStyleClass="w-full underline-input" promptLabel="בחרו סיסמה חזקה"></p-password>
+          <label for="password">סיסמה</label>
+        </p-floatLabel>
+      </div>
+
+      <button pButton type="submit" label="ליצירת חשבון" class="p-button-pink w-full"></button>
+      
+      <p class="login-link">כבר יש לך חשבון? <a routerLink="/login">התחברות</a></p>
+
+      <div class="social-login-icons">
+        <div class="icons-row">
+          <i class="pi pi-facebook" routerLink="/netfree"></i>
+          <i class="pi pi-instagram" routerLink="/netfree"></i>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="auth-section info-box hide-on-mobile">
+    <div class="promo-content">
+        <h3>למה כדאי להצטרף?</h3>
+        <ul>
+            <li>✨ משלוחים חינם בקנייה מעל 299₪</li>
+            <li>✨ עדכונים על קולקציות חדשות לפני כולם</li>
+            <li>✨ מתנה מיוחדת ביום ההולדת</li>
+        </ul>
+    </div>
+  </div>
+</div>

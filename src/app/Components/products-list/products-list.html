@@ -1,0 +1,123 @@
+<div class="page">
+  <div class="page-inner">
+
+    <div class="header-section">
+      <nav class="breadcrumbs">
+        <a routerLink="/" class="breadcrumb-link">דף הבית</a>
+        <span class="separator">/</span>
+        <span class="breadcrumb-current" *ngIf="searchQuery">תוצאות חיפוש</span>
+        <span class="breadcrumb-current" *ngIf="!searchQuery && currentTitle">{{ currentTitle }}</span>
+      </nav>
+
+      <ng-container *ngIf="searchQuery">
+        <h1 class="search-title">מציג תוצאות עבור: "{{ searchQuery }}"</h1>
+      </ng-container>
+
+      <ng-container *ngIf="!searchQuery && currentTitle">
+        <div class="category-content">
+          <h1 class="category-title">{{ currentTitle }}</h1>
+
+          <div class="category-desc" *ngIf="currentDesc">
+            <p>
+              <ng-container *ngIf="isExpanded || currentDesc.length <= descMaxLength">
+                {{ currentDesc }}
+              </ng-container>
+              <ng-container *ngIf="!isExpanded && currentDesc.length > descMaxLength">
+                {{ currentDesc | slice:0:descMaxLength }}...
+              </ng-container>
+            </p>
+
+            <button class="read-more-btn" *ngIf="currentDesc.length > descMaxLength" (click)="toggleDesc()">
+              {{ isExpanded ? 'קראו פחות' : 'קראו עוד' }}
+            </button>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="filter-toolbar-wrapper" *ngIf="!isLoading && !errorMsg && products.length > 0">
+      <div class="filter-toolbar" *ngIf="!isLoading && !errorMsg && products.length > 0">
+      
+      <button class="filter-sort-btn" (click)="isFilterSidebarOpen = true">
+        <i class="pi pi-sliders-h"></i>
+        סינון ומיון
+      </button>
+
+      <div class="toolbar-divider"></div>
+
+      <div class="quick-filters">
+        <label class="custom-checkbox">
+          ציפוי זהב 14K
+          <input type="checkbox" 
+                 [checked]="selectedMaterials.includes('ציפוי זהב 14K')" 
+                 (change)="toggleMaterial('ציפוי זהב 14K', $event)">
+        </label>
+
+        <label class="custom-checkbox">
+          כסף סטרלינג
+          <input type="checkbox" 
+                 [checked]="selectedMaterials.includes('כסף סטרלינג')" 
+                 (change)="toggleMaterial('כסף סטרלינג', $event)">
+        </label>
+      </div>
+
+    </div>
+    
+    </div>
+    <div *ngIf="isLoading" class="state">טוען מוצרים…</div>
+    <div *ngIf="!isLoading && errorMsg" class="state error">{{ errorMsg }}</div>
+    
+    <div class="empty-state" *ngIf="!isLoading && !errorMsg && products.length === 0">
+      <i class="pi pi-search"></i>
+
+      <ng-container *ngIf="searchQuery">
+        <h3>לא מצאנו תוצאות עבור "{{ searchQuery }}"</h3>
+        <p>אולי כדאי לנסות לחפש מילים אחרות או לבדוק שאין שגיאת כתיב.</p>
+        <button class="btn-clear-empty" (click)="clearFiltersAndShowAll()">חזרה לכל המוצרים</button>
+      </ng-container>
+
+      <ng-container *ngIf="!searchQuery && hasActiveFilters()">
+        <h3>לא מצאנו תכשיטים שתואמים לסינון שלך</h3>
+        <p>נסו להסיר כמה מהמסננים כדי לראות עוד אפשרויות מדהימות.</p>
+        <button class="btn-clear-empty" (click)="clearFiltersAndShowAll()">נקי סינונים</button>
+      </ng-container>
+
+      <ng-container *ngIf="!searchQuery && !hasActiveFilters()">
+        <h3>הקולקציה הזו עדיין בהכנה...</h3>
+        <p>ממש בקרוב יעלו כאן תכשיטים חדשים ומרגשים✨ בינתיים, אפשר להציץ בשאר הקולקציות שלנו.</p>
+        <button class="btn-clear-empty" routerLink="/products">לכל התכשיטים</button>
+      </ng-container>
+    </div>
+
+    <div class="pnd-grid" *ngIf="!isLoading && !errorMsg && products.length > 0">
+      <app-product-card
+        *ngFor="let p of products; trackBy: trackById"
+        [product]="p"
+        (addToCart)="onAddToCart($event)"
+      ></app-product-card>
+    </div>
+    <div class="loading-more-container" *ngIf="isLoadingMore">
+      <i class="pi pi-spinner pi-spin"></i>
+      <span>טוען מוצרים נוספים...</span>
+    </div>
+  </div>
+</div>
+
+<div class="sidebar-overlay" *ngIf="isFilterSidebarOpen" (click)="isFilterSidebarOpen = false"></div>
+
+<div class="custom-sidebar" [class.open]="isFilterSidebarOpen">
+  <div class="sidebar-header">
+    <h2> מסנני מוצרים</h2>
+    <button class="close-btn" (click)="isFilterSidebarOpen = false">
+      <i class="pi pi-times"></i>
+    </button>
+  </div>
+  <div class="sidebar-content">
+    <app-product-filter 
+      (applyFilters)="onApplyFilters($event)" 
+      (closeSidebar)="isFilterSidebarOpen = false">
+    </app-product-filter>
+  </div>
+</div>
+
+

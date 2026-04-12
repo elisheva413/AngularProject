@@ -1,0 +1,146 @@
+/* --- עיצוב כללי של העמוד --- */
+:host {
+  display: block;
+  font-family: 'Assistant', sans-serif;
+  direction: rtl;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+}
+
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: stretch; 
+  padding: 5rem 10%;
+  max-width: 1400px;
+  margin: 0 auto;
+  gap: 5rem;
+
+  .auth-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    
+    h1 { font-size: 3rem; font-weight: 800; margin-bottom: 0.5rem; }
+    p { color: #666; font-size: 1.1rem; }
+    h3 { font-size: 1.8rem; margin-bottom: 2rem; font-weight: 600; }
+  }
+}
+
+:host ::ng-deep {
+
+  .underline-input {
+    border: none !important;
+    border-bottom: 1px solid #000 !important; 
+    border-radius: 0 !important;
+    background: transparent !important;
+    padding: 1rem 0 !important;
+    width: 100%;
+    transition: border-color 0.2s;
+    
+    &:focus {
+      box-shadow: none !important;
+      border-bottom-width: 2px !important;
+    }
+
+    &:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+    }
+  }
+
+  p-floatlabel {
+    display: block;
+    position: relative;
+    label {
+      right: 0 !important; 
+      left: auto !important;
+      color: #999;
+      transition: all 0.2s ease;
+    }
+  
+    input:focus ~ label,
+    input.p-filled ~ label,
+    .p-inputwrapper-focus ~ label,
+    .p-inputwrapper-filled ~ label {
+      top: -1.2rem !important; 
+      font-size: 0.9rem !important;
+      color: #000 !important;
+      font-weight: bold;
+    }
+  }
+
+  /* --- עדכון כפתור ורוד שהופך לשחור --- */
+  .p-button.p-button-pink {
+    background: #ffb6c1 !important;
+    color: #fff !important;
+    border: 1px solid #ffb6c1 !important;
+    border-radius: 0 !important;
+    padding: 1.2rem !important;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 2rem;
+    width: 100%;
+    transition: all 0.3s ease;
+
+    /* הפיכה לשחור במעבר עכבר ובלחיצה */
+    &:hover, &:active, &:focus { 
+      background: #000 !important; 
+      border-color: #000 !important;
+      color: #fff !important;
+      opacity: 1 !important;
+    }
+  }
+
+  .p-button.p-button-outlined-black {
+    background: transparent !important;
+    color: #000 !important;
+    border: 1px solid #000 !important;
+    border-radius: 0 !important;
+    padding: 1.2rem !important;
+    width: 100%;
+    transition: background 0.2s;
+
+    &:hover { background: #f4f4f4 !important; }
+  }
+
+  .p-divider-vertical {
+    &::before { border-left: 1px solid #e0e0e0 !important; }
+  }
+
+  /* עיצוב כפתורי רשתות חברתיות */
+  .social-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    
+    .p-button.p-button-secondary.p-button-outlined {
+        border-color: #e0e0e0 !important;
+        color: #333 !important;
+        &:hover {
+            background: #f9f9f9 !important;
+            border-color: #000 !important;
+        }
+    }
+  }
+}
+
+.field {
+  margin-bottom: 2.5rem;
+  width: 100%;
+}
+
+.social-auth {
+    margin-top: 2rem;
+    p { margin-bottom: 1rem; font-size: 0.9rem; color: #888; }
+}
+
+@media (max-width: 992px) {
+  .auth-container {
+    flex-direction: column;
+    padding: 2rem 5%;
+    gap: 3rem;
+  }
+  .p-divider-vertical { display: none; }
+}

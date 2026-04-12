@@ -1,0 +1,66 @@
+
+
+<div class="header-spacer" [class.hidden]="isHomePage"></div>
+
+<div class="card">
+<p-menu #userMenu [model]="userMenuItems" [popup]="true" appendTo="body"></p-menu></div>
+
+<header class="pandora-header" 
+        [class.header-hidden]="isHeaderHidden" 
+        [class.header-scrolled]="isScrolled"
+        [class.header-transparent]="isTransparent">
+        
+  <div class="promo-bar">משלוח חינם בקנייה מעל 299₪</div>
+
+  <div class="middle-header">
+    <div class="header-left">
+      <div class="search-container">
+        <i class="pi pi-search" style="cursor: pointer;" (click)="onSearch()"></i>
+        <input 
+          type="text" 
+          placeholder="חפשו את התכשיט הבא שלכם..."
+          [(ngModel)]="searchQuery"
+          (keyup.enter)="onSearch()"> 
+      </div>
+    </div>
+
+    <div class="header-center">
+      <img src="images/logo.png" alt="Pandora" class="main-logo" routerLink="/">
+    </div>
+
+    <div class="header-right">
+  <i *ngIf="isAdmin" 
+     class="pi pi-cog" 
+     routerLink="/admin" 
+     style="cursor: pointer; color: black;" 
+     title="פאנל ניהול">
+  </i>
+
+  <i class="pi pi-map-marker" routerLink="/stores" style="cursor: pointer;" title="סניפי הרשת"></i>
+  
+  <i class="pi pi-user" (click)="userMenu.toggle($event)" style="cursor: pointer;" title="אפשרויות משתמש"></i> 
+  <p-menu #userMenu [model]="userMenuItems" [popup]="true"></p-menu>
+  
+  <div class="cart-icon" routerLink="/cart" style="cursor: pointer;">
+    <i class="pi pi-shopping-bag"></i>
+    <span class="count" *ngIf="cartItemCount > 0">{{ cartItemCount }}</span>
+  </div>
+</div>
+  </div>
+
+   <nav class="categories-nav">
+     <ul>
+       <li><a [routerLink]="['/products']" [queryParams]="{ categoryId: 135 }">חדש</a></li>
+       <li><a href="#">בלעדי לאתר</a></li>
+       <li><a routerLink="/" fragment="collections">קולקציות</a></li>
+       <li><a [routerLink]="['/gift-card']" class="giftcard-link">GIFT CARD</a></li>
+       <li><a [routerLink]="['/products']" [queryParams]="{ categoryId: 901 }">מתנות</a></li>
+       <li><a [routerLink]="['/products']" [queryParams]="{ categoryId: 115 }">שרשראות</a></li>
+       <li><a [routerLink]="['/products']" [queryParams]="{ categoryId: 120 }">עגילים</a></li>
+       <li><a [routerLink]="['/products']" [queryParams]="{ categoryId: 100 }">טבעות</a></li>
+       <li><a [routerLink]="['/products']" [queryParams]="{ categoryId: 105 }">צמידים</a></li>
+       <li><a [routerLink]="['/products']" [queryParams]="{ categoryId: 110 }">צ'ארמס</a></li>
+       <li><a [routerLink]="['/products']" [queryParams]="{ categoryId: 130 }">תכשיטי חריטה</a></li>
+     </ul>
+   </nav>
+</header>
