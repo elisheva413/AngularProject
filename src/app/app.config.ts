@@ -1,10 +1,11 @@
 import { ApplicationConfig } from '@angular/core';
 import { provideRouter, withInMemoryScrolling } from '@angular/router'; 
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async'; // חובה ל-PrimeNG
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
 import { routes } from './app.routes';
+import { retryInterceptor } from './core/interceptors/retry.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,7 +16,7 @@ export const appConfig: ApplicationConfig = {
         scrollPositionRestoration: 'enabled'
       })
     ),
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([retryInterceptor])),
     provideAnimationsAsync(), // הוספנו תמיכה באנימציות
     providePrimeNG({
       theme: {
